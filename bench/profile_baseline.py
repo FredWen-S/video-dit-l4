@@ -15,6 +15,7 @@ with it resident, the fp32 VAE decode runs out of memory on the 22 GiB L4 even a
 Frames are saved as uint8 .npy so later optimizations can be scored against this baseline.
 
 usage: python bench/profile_baseline.py --frames 33 --steps 50 --kernels --out results/base_33f
+       python bench/profile_baseline.py --frames 33 --compile blocks --kernels --out results/compile_33f
 """
 import argparse
 import json
@@ -145,6 +146,10 @@ def main():
     ap.add_argument("--prompts", default=os.path.join(os.path.dirname(__file__), "prompts.txt"))
     ap.add_argument("--n-prompts", type=int, default=None, help="use only the first n prompts")
     ap.add_argument("--warmup-steps", type=int, default=2, help="untimed short run first; 0 to skip")
+    ap.add_argument("--compile", choices=["none", "blocks", "full"], default="none",
+                    help="blocks: compile each transformer block (diffusers compile_repeated_blocks); "
+                         "full: torch.compile the whole transformer forward")
+    ap.add_argument("--no-fullgraph", action="store_true", help="allow graph breaks when compiling")
     ap.add_argument("--kernels", action="store_true", help="kernel-category split of one forward")
     ap.add_argument("--no-save-frames", action="store_true")
     ap.add_argument("--out", required=True)
@@ -164,6 +169,13 @@ def main():
     pipe.set_progress_bar_config(disable=True)
     torch.cuda.synchronize()
     weights_all_gb = torch.cuda.memory_allocated() / 1e9
+
+    # Compile before wrapping, so the timing wrapper stays outside the compiled region
+    fullgraph = not args.no_fullgraph
+    if args.compile == "blocks":
+        pipe.transformer.compile_repeated_blocks(fullgraph=fullgraph)
+    elif args.compile == "full":
+        pipe.transformer.forward = torch.compile(pipe.transformer.forward, fullgraph=fullgraph)
 
     ph = Phases()
     ph.wrap(pipe.text_encoder, "forward", "text_encoder")
@@ -194,8 +206,14 @@ def main():
                     num_frames=args.frames, num_inference_steps=steps, guidance_scale=args.guidance,
                     generator=g, output_type="np").frames[0]
 
+    # With --compile, the warmup run also pays the compile time; compare it with an eager warmup
+    warmup_s = None
     if args.warmup_steps:
+        t0 = time.perf_counter()
         run(0, args.warmup_steps)
+        torch.cuda.synchronize()
+        warmup_s = time.perf_counter() - t0
+        print(f"warmup ({args.warmup_steps} steps, compile={args.compile}): {warmup_s:.1f} s")
 
     results = []
     for i, prompt in enumerate(prompts):
@@ -221,7 +239,7 @@ def main():
 
     report = dict(
         config=vars(args), weights_gb=weights_gb, weights_with_text_encoder_gb=weights_all_gb,
-        text_encoding=encode, runs=results,
+        text_encoding=encode, warmup_s=warmup_s, runs=results,
         env=dict(gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                  diffusers=diffusers.__version__, transformers=transformers.__version__,
                  sdpa_flash=torch.backends.cuda.flash_sdp_enabled()))
