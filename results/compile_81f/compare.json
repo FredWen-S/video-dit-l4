@@ -1,0 +1,15 @@
+{
+ "ref": "results/eager_81f",
+ "test": "results/compile_81f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 8.661035465386593,
+   "psnr_mean": 21.571773529052734,
+   "psnr_min": 19.604093551635742,
+   "lpips_mean": 0.10125873982906342
+  }
+ ]
+}

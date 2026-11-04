@@ -1,0 +1,38 @@
+{
+ "ref": "results/base_33f",
+ "test": "results/eager_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": true,
+   "max_abs": 0,
+   "mean_abs": 0.0,
+   "psnr_mean": 100.0,
+   "psnr_min": Infinity
+  },
+  {
+   "video": "frames_1.npy",
+   "identical": true,
+   "max_abs": 0,
+   "mean_abs": 0.0,
+   "psnr_mean": 100.0,
+   "psnr_min": Infinity
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": true,
+   "max_abs": 0,
+   "mean_abs": 0.0,
+   "psnr_mean": 100.0,
+   "psnr_min": Infinity
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": true,
+   "max_abs": 0,
+   "mean_abs": 0.0,
+   "psnr_mean": 100.0,
+   "psnr_min": Infinity
+  }
+ ]
+}

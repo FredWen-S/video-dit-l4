@@ -1,0 +1,42 @@
+{
+ "ref": "results/eager_33f",
+ "test": "results/compile_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 244,
+   "mean_abs": 4.5721033957362085,
+   "psnr_mean": 29.46292495727539,
+   "psnr_min": 28.069053649902344,
+   "lpips_mean": 0.021875344216823578
+  },
+  {
+   "video": "frames_1.npy",
+   "identical": false,
+   "max_abs": 215,
+   "mean_abs": 5.710157641114672,
+   "psnr_mean": 27.20941162109375,
+   "psnr_min": 26.708650588989258,
+   "lpips_mean": 0.06673914939165115
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": false,
+   "max_abs": 236,
+   "mean_abs": 5.2696449167152295,
+   "psnr_mean": 29.231632232666016,
+   "psnr_min": 28.72951316833496,
+   "lpips_mean": 0.035689160227775574
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 254,
+   "mean_abs": 5.3967159070674695,
+   "psnr_mean": 25.377416610717773,
+   "psnr_min": 24.71391487121582,
+   "lpips_mean": 0.07957013696432114
+  }
+ ]
+}

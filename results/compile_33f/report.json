@@ -1,0 +1,234 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/compile_33f"
+ },
+ "weights_gb": 3.394953216,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 1.9978330089998053,
+  "calls": 8,
+  "total_s": 1.9750523681640626,
+  "mean_ms": 246.8815460205078,
+  "peak_gb": 14.87867904
+ },
+ "warmup_s": 32.41329729500012,
+ "runs": [
+  {
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 162.56589393399986,
+   "other_s": 0.4571473519686151,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 151.21003271484375,
+     "mean_ms": 1512.1003271484376,
+     "peak_gb": 3.816325632
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8987138671875,
+     "mean_ms": 10898.7138671875,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1100.123076923077,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.11996923076923,
+    "temp_c_max": 83.0,
+    "samples": 325
+   }
+  },
+  {
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 161.99960889399995,
+   "other_s": 0.34962561763276767,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 150.7343699951172,
+     "mean_ms": 1507.3436999511719,
+     "peak_gb": 3.816325632
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.91561328125,
+     "mean_ms": 10915.61328125,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1105.2314814814815,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.59586419753086,
+    "temp_c_max": 78.0,
+    "samples": 324
+   }
+  },
+  {
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 162.57261962700022,
+   "other_s": 0.34450854301584855,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 151.31354858398439,
+     "mean_ms": 1513.1354858398438,
+     "peak_gb": 3.816325632
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9145625,
+     "mean_ms": 10914.5625,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1093.8923076923077,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.43547692307692,
+    "temp_c_max": 78.0,
+    "samples": 325
+   }
+  },
+  {
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 162.40639682899973,
+   "other_s": 0.34873423134348513,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 151.14214404296874,
+     "mean_ms": 1511.4214404296874,
+     "peak_gb": 3.816325632
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9155185546875,
+     "mean_ms": 10915.5185546875,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1098.8307692307692,
+    "sm_mhz_min": 975.0,
+    "power_w_mean": 71.74858461538462,
+    "temp_c_max": 78.0,
+    "samples": 325
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.11.0+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.1",
+  "sdpa_flash": true
+ },
+ "kernels": {
+  "gpu_ms": 1495.6763900000005,
+  "share": {
+   "other": 0.05043710825708759,
+   "gemm": 0.3995819336293729,
+   "norm": 0.05547579513506929,
+   "attention": 0.49450516297847025
+  },
+  "ms": {
+   "other": 75.43759199999998,
+   "gemm": 597.6452640000002,
+   "norm": 82.97383700000003,
+   "attention": 739.6196970000003
+  },
+  "top_kernels": [
+   [
+    "void pytorch_flash::flash_fwd_kernel<Flash_fwd_kernel_traits<128, 128, 32, 4, false, false, cutlass::bfloat16_t, Flash_k",
+    732.7384970000002,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    402.1078839999999,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    191.43093200000004,
+    "gemm"
+   ],
+   [
+    "triton_poi_fused_gelu_view_6",
+    57.820778999999995,
+    "other"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_copy_mul_slice_sub_unbind_view_1",
+    32.985642000000006,
+    "norm"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_5",
+    23.162531,
+    "norm"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_2",
+    15.463548999999997,
+    "norm"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_7",
+    13.631515999999996,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_0",
+    10.604453000000001,
+    "norm"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm__scaled_dot_product_flash_attention_permute_view_3",
+    6.642543999999999,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_128x128_ldg8_relu_f2f_stages_64x3_tn",
+    3.603088,
+    "gemm"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, floa",
+    0.7576620000000001,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::",
+    0.753694,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f",
+    0.745149,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::T",
+    0.604318,
+    "other"
+   ]
+  ]
+ }
+}

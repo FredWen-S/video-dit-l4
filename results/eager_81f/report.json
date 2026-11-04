@@ -1,0 +1,156 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/eager_81f"
+ },
+ "weights_gb": 3.369787392,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.4722793260002618,
+  "calls": 2,
+  "total_s": 0.4633712463378906,
+  "mean_ms": 231.6856231689453,
+  "peak_gb": 14.853513216
+ },
+ "warmup_s": 54.27127781799982,
+ "runs": [
+  {
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 677.2569640809998,
+   "other_s": 0.7176423036560209,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 649.7359624023437,
+     "mean_ms": 6497.359624023437,
+     "peak_gb": 5.037199872
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.803359375,
+     "mean_ms": 26803.359375,
+     "peak_gb": 12.212794368
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1199.3357933579337,
+    "sm_mhz_min": 870.0,
+    "power_w_mean": 71.87979335793358,
+    "temp_c_max": 79.0,
+    "samples": 1355
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.11.0+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.1",
+  "sdpa_flash": true
+ },
+ "kernels": {
+  "gpu_ms": 6521.559047000001,
+  "share": {
+   "other": 0.24756612757231708,
+   "gemm": 0.2069822651718452,
+   "norm": 0.035223044266641884,
+   "attention": 0.5102285629891958
+  },
+  "ms": {
+   "other": 1614.5171190000008,
+   "gemm": 1349.8470640000003,
+   "norm": 229.7091629999999,
+   "attention": 3327.4857009999996
+  },
+  "top_kernels": [
+   [
+    "void pytorch_flash::flash_fwd_kernel<Flash_fwd_kernel_traits<128, 128, 32, 4, false, false, cutlass::bfloat16_t, Flash_k",
+    3327.4857009999996,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    480.90184800000003,
+    "gemm"
+   ],
+   [
+    "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16",
+    462.60520299999985,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    401.871195,
+    "gemm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::",
+    312.0878700000001,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, a",
+    259.868118,
+    "other"
+   ],
+   [
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:",
+    225.9611109999999,
+    "other"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambd",
+    195.93885499999996,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::bfloat16_copy_kernel_cuda(at:",
+    165.53335199999998,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f",
+    158.31070899999995,
+    "other"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, floa",
+    155.38464299999995,
+    "norm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::Ge",
+    149.38933099999997,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::",
+    105.741233,
+    "other"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c10::BFloat",
+    74.32452,
+    "norm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::BFloat16>, std::array<char*, 3ul> >(i",
+    38.0068,
+    "other"
+   ]
+  ]
+ }
+}

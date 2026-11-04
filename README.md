@@ -8,7 +8,7 @@ Inference profiling and optimization of a video diffusion transformer (Wan2.1-T2
 - [x] Baseline script: phase timing, peak memory, clocks, kernel-category split (`bench/profile_baseline.py`)
 - [x] Baseline run on Colab L4: 3 of 7 predictions held (`results/L4_baseline.md`). Elementwise work in fp32 takes 28–39% of a forward, so the fusion kernel moves up the plan
 - [ ] Optimizations, one at a time
-  - [ ] `torch.compile` (per-block, default mode): predictions written (`predictions_compile_2026-11-03.md`), run `colab/02_compile.ipynb`
+  - [x] `torch.compile` (per-block, default mode): 1.34× at 33 f and 1.23× at 81 f; 2 of 7 predictions held (`results/L4_compile.md`). Outputs diverge from eager (21–29 dB), so the next step is a rounding noise floor
 - [ ] Quality metrics
 
 ## Plan
