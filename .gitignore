@@ -1,4 +1,7 @@
-results/
 __pycache__/
 *.npy
 *.mp4
+*.trace.json
+*.nsys-rep
+results/smoke/
+results/nsys_run/

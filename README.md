@@ -6,7 +6,7 @@ Inference profiling and optimization of a video diffusion transformer (Wan2.1-T2
 
 - [x] Analytic cost model (`tools/cost_model.py`) and baseline predictions (`predictions_baseline_2026-11-03.md`)
 - [x] Baseline script: phase timing, peak memory, clocks, kernel-category split (`bench/profile_baseline.py`)
-- [ ] Baseline run on Colab L4 (`colab/01_baseline.ipynb`)
+- [x] Baseline run on Colab L4: 3 of 7 predictions held (`results/L4_baseline.md`). Elementwise work in fp32 takes 28–39% of a forward, so the fusion kernel moves up the plan
 - [ ] Optimizations, one at a time
 - [ ] Quality metrics
 
