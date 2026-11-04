@@ -9,6 +9,9 @@ also an NVTX range, so the same run under `nsys profile` shows them on the timel
 With --kernels, one transformer forward (captured from the last run) is profiled with
 torch.profiler and its GPU time is split into attention / GEMM / norm / other kernels.
 
+All prompts are encoded first, then the umT5 text encoder (~11 GB) is dropped from the GPU:
+with it resident, the fp32 VAE decode runs out of memory on the 22 GiB L4 even at 17 frames.
+
 Frames are saved as uint8 .npy so later optimizations can be scored against this baseline.
 
 usage: python bench/profile_baseline.py --frames 33 --steps 50 --kernels --out results/base_33f
@@ -20,8 +23,10 @@ import subprocess
 import time
 from collections import defaultdict
 
-import numpy as np
-import torch
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
+
+import numpy as np  # noqa: E402
+import torch  # noqa: E402
 
 MODEL = "Wan-AI/Wan2.1-T2V-1.3B-Diffusers"
 
@@ -158,21 +163,39 @@ def main():
     pipe = WanPipeline.from_pretrained(args.model, vae=vae, torch_dtype=torch.bfloat16).to("cuda")
     pipe.set_progress_bar_config(disable=True)
     torch.cuda.synchronize()
-    weights_gb = torch.cuda.memory_allocated() / 1e9
+    weights_all_gb = torch.cuda.memory_allocated() / 1e9
 
     ph = Phases()
     ph.wrap(pipe.text_encoder, "forward", "text_encoder")
     ph.wrap(pipe.transformer, "forward", "transformer")
     ph.wrap(pipe.vae, "decode", "vae_decode")
 
-    def run(prompt, steps):
+    # Encode every prompt (and the empty negative prompt) up front, then drop the text encoder
+    torch.cuda.synchronize()
+    t0 = time.perf_counter()
+    with torch.no_grad():
+        # max_sequence_length=512 matches WanPipeline.__call__ (encode_prompt alone defaults to 226)
+        embeds = [pipe.encode_prompt(prompt=p, do_classifier_free_guidance=args.guidance > 1,
+                                     max_sequence_length=512, device="cuda") for p in prompts]
+    torch.cuda.synchronize()
+    encode = dict(wall_s=time.perf_counter() - t0, **ph.summary()["text_encoder"])
+    ph.orig.pop("text_encoder")
+    pipe.text_encoder.to("cpu")
+    pipe.text_encoder = None
+    torch.cuda.empty_cache()
+    weights_gb = torch.cuda.memory_allocated() / 1e9
+    print(f"weights {weights_all_gb:.1f} GB with text encoder, {weights_gb:.1f} GB without | "
+          f"encoded {len(prompts)} prompts in {encode['wall_s']:.1f} s")
+
+    def run(i, steps):
         g = torch.Generator("cuda").manual_seed(args.seed)
-        return pipe(prompt=prompt, height=args.height, width=args.width, num_frames=args.frames,
-                    num_inference_steps=steps, guidance_scale=args.guidance, generator=g,
-                    output_type="np").frames[0]
+        pe, ne = embeds[i]
+        return pipe(prompt_embeds=pe, negative_prompt_embeds=ne, height=args.height, width=args.width,
+                    num_frames=args.frames, num_inference_steps=steps, guidance_scale=args.guidance,
+                    generator=g, output_type="np").frames[0]
 
     if args.warmup_steps:
-        run(prompts[0], args.warmup_steps)
+        run(0, args.warmup_steps)
 
     results = []
     for i, prompt in enumerate(prompts):
@@ -181,7 +204,7 @@ def main():
         torch.cuda.synchronize()
         with SmiSampler() as smi:
             t0 = time.perf_counter()
-            frames = run(prompt, args.steps)
+            frames = run(i, args.steps)
             torch.cuda.synchronize()
             wall = time.perf_counter() - t0
         phases = ph.summary()
@@ -197,7 +220,8 @@ def main():
         export_to_video(list(frames), os.path.join(args.out, f"video_{i}.mp4"), fps=16)
 
     report = dict(
-        config=vars(args), weights_gb=weights_gb, runs=results,
+        config=vars(args), weights_gb=weights_gb, weights_with_text_encoder_gb=weights_all_gb,
+        text_encoding=encode, runs=results,
         env=dict(gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                  diffusers=diffusers.__version__, transformers=transformers.__version__,
                  sdpa_flash=torch.backends.cuda.flash_sdp_enabled()))
