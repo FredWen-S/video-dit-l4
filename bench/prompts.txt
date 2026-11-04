@@ -1,0 +1,5 @@
+# Fixed evaluation prompts: fast motion, slow camera move, fine texture, many small objects
+A red fox runs across a snowy field, kicking up powder, side tracking shot.
+Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.
+Close-up of rain drops landing on a green leaf, shallow depth of field.
+A busy street market at night with people walking between food stalls and hanging lanterns.
