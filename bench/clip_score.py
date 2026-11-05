@@ -38,9 +38,9 @@ def main():
     table = {}
     for run in args.runs:
         with open(os.path.join(run, "report.json")) as f:
-            prompts = [r["prompt"] for r in json.load(f)["runs"]]
+            prompts = [(r.get("prompt_id", i), r["prompt"]) for i, r in enumerate(json.load(f)["runs"])]
         rows = []
-        for i, prompt in enumerate(prompts):
+        for i, prompt in prompts:
             path = os.path.join(run, f"frames_{i}.npy")
             if os.path.exists(path):
                 frames = np.load(path)
@@ -60,7 +60,7 @@ def main():
             img = img / img.norm(dim=-1, keepdim=True)
             txt = txt / txt.norm(dim=-1, keepdim=True)
             per_frame = (100 * (img @ txt.T).squeeze(1).clamp(min=0)).cpu().numpy()
-            rows.append(dict(video=os.path.basename(path), prompt=prompt, clip=float(per_frame.mean()),
+            rows.append(dict(video=f"prompt_{i}", source=os.path.basename(path), prompt=prompt, clip=float(per_frame.mean()),
                              clip_min=float(per_frame.min()), frames_scored=len(per_frame)))
         with open(os.path.join(run, "clip.json"), "w") as f:
             json.dump(dict(model=args.model, every=args.every, videos=rows), f, indent=1)

@@ -17,6 +17,7 @@ Frames are saved as uint8 .npy so later optimizations can be scored against this
 usage: python bench/profile_baseline.py --frames 33 --steps 50 --kernels --out results/base_33f
        python bench/profile_baseline.py --frames 33 --compile blocks --kernels --out results/compile_33f
        python bench/profile_baseline.py --frames 33 --attn efficient --kernels --out results/efficient_33f
+       python bench/profile_baseline.py --frames 33 --dtype fp32 --attn efficient --prompt-ids 0 3 --out results/fp32_33f
 """
 import argparse
 import json
@@ -146,11 +147,18 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--prompts", default=os.path.join(os.path.dirname(__file__), "prompts.txt"))
     ap.add_argument("--n-prompts", type=int, default=None, help="use only the first n prompts")
+    ap.add_argument("--prompt-ids", type=int, nargs="+", default=None,
+                    help="use these prompts (0-based); outputs keep the prompt's index, e.g. frames_3.npy")
     ap.add_argument("--warmup-steps", type=int, default=2, help="untimed short run first; 0 to skip")
     ap.add_argument("--compile", choices=["none", "blocks", "full"], default="none",
                     help="blocks: compile each transformer block (diffusers compile_repeated_blocks); "
                          "full: torch.compile the whole transformer forward")
     ap.add_argument("--no-fullgraph", action="store_true", help="allow graph breaks when compiling")
+    ap.add_argument("--emulate-precision-casts", action="store_true",
+                    help="Inductor keeps eager's bf16 downcast/upcast pairs inside fused kernels")
+    ap.add_argument("--dtype", choices=["bf16", "fp32"], default="bf16",
+                    help="transformer weights and activations; fp32 upcasts the bf16 weights and turns TF32 off, "
+                         "and needs --attn efficient (flash has no fp32 kernel)")
     ap.add_argument("--attn", choices=["default", "flash", "efficient", "cudnn", "math"], default="default",
                     help="force one SDPA backend inside the transformer only (the VAE keeps the default); "
                          "default lets torch choose, which is flash. math materializes N^2 scores: OOM")
@@ -166,7 +174,9 @@ def main():
 
     os.makedirs(args.out, exist_ok=True)
     with open(args.prompts) as f:
-        prompts = [p.strip() for p in f if p.strip() and not p.startswith("#")][:args.n_prompts]
+        all_prompts = [p.strip() for p in f if p.strip() and not p.startswith("#")]
+    ids = args.prompt_ids if args.prompt_ids is not None else list(range(len(all_prompts)))[:args.n_prompts]
+    prompts = [all_prompts[i] for i in ids]
 
     vae = AutoencoderKLWan.from_pretrained(args.model, subfolder="vae", torch_dtype=torch.float32)
     pipe = WanPipeline.from_pretrained(args.model, vae=vae, torch_dtype=torch.bfloat16).to("cuda")
@@ -174,7 +184,17 @@ def main():
     torch.cuda.synchronize()
     weights_all_gb = torch.cuda.memory_allocated() / 1e9
 
+    if args.dtype == "fp32":
+        # Same (bf16-rounded) weights as the bf16 runs, so only activation and math precision change
+        pipe.transformer.to(torch.float32)
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+
     # Compile before wrapping, so the timing wrapper stays outside the compiled region
+    if args.emulate_precision_casts:
+        import torch._inductor.config as inductor_config
+        assert hasattr(inductor_config, "emulate_precision_casts"), "this torch has no emulate_precision_casts"
+        inductor_config.emulate_precision_casts = True
     fullgraph = not args.no_fullgraph
     if args.compile == "blocks":
         pipe.transformer.compile_repeated_blocks(fullgraph=fullgraph)
@@ -232,7 +252,7 @@ def main():
         print(f"warmup ({args.warmup_steps} steps, compile={args.compile}): {warmup_s:.1f} s")
 
     results = []
-    for i, prompt in enumerate(prompts):
+    for i, (pid, prompt) in enumerate(zip(ids, prompts)):
         ph.reset()
         ph.capture = "transformer" if (args.kernels and i == len(prompts) - 1) else None
         torch.cuda.synchronize()
@@ -243,22 +263,23 @@ def main():
             wall = time.perf_counter() - t0
         phases = ph.summary()
         other = wall - sum(p["total_s"] for p in phases.values())
-        r = dict(prompt=prompt, wall_s=wall, other_s=other, phases=phases, clocks=smi.stats)
+        r = dict(prompt_id=pid, prompt=prompt, wall_s=wall, other_s=other, phases=phases, clocks=smi.stats)
         results.append(r)
-        print(f"[{i}] {wall:.1f} s | " + " | ".join(
+        print(f"[{pid}] {wall:.1f} s | " + " | ".join(
             f"{k} {v['total_s']:.1f} s x{v['calls']} peak {v['peak_gb']:.1f} GB" for k, v in phases.items())
             + f" | other {other:.1f} s | SM {smi.stats.get('sm_mhz_mean', 0):.0f} MHz")
         u8 = (np.clip(frames, 0, 1) * 255).round().astype(np.uint8)
         if not args.no_save_frames:
-            np.save(os.path.join(args.out, f"frames_{i}.npy"), u8)
-        export_to_video(list(frames), os.path.join(args.out, f"video_{i}.mp4"), fps=16)
+            np.save(os.path.join(args.out, f"frames_{pid}.npy"), u8)
+        export_to_video(list(frames), os.path.join(args.out, f"video_{pid}.mp4"), fps=16)
 
     report = dict(
         config=vars(args), weights_gb=weights_gb, weights_with_text_encoder_gb=weights_all_gb,
         text_encoding=encode, warmup_s=warmup_s, runs=results,
         env=dict(gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                  diffusers=diffusers.__version__, transformers=transformers.__version__,
-                 sdpa_flash=torch.backends.cuda.flash_sdp_enabled()))
+                 sdpa_flash=torch.backends.cuda.flash_sdp_enabled(),
+                 transformer_dtype=str(pipe.transformer.dtype), tf32=torch.backends.cuda.matmul.allow_tf32))
     if args.kernels and ph.captured:
         a, k = ph.captured
         report["kernels"] = profile_forward(ph.orig["transformer"], a, k,
