@@ -1,0 +1,12 @@
+{
+ "frames_0.npy": {
+  "sha256": "be3ea150cbb72d81d0c3eb5adb200ce65a21fed54eab877a42b8ee056bdbd741",
+  "shape": [
+   81,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ }
+}

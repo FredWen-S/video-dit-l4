@@ -1,6 +1,6 @@
 __pycache__/
 *.npy
-*.mp4
+# mp4s (~0.2–0.6 MB each) are kept so CLIP can be recomputed without the .npy
 *.trace.json
 *.nsys-rep
 results/smoke/

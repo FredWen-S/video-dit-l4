@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """CLIP score of each saved video against its prompt.
 
-For each run directory, reads the prompts from report.json and frames_<i>.npy, embeds every
+For each run directory, reads the prompts from report.json and frames_<i>.npy (or, if the .npy
+was not kept, the decoded video_<i>.mp4; the codec loss is far below what CLIP resolves), embeds every
 --every-th frame and the prompt with CLIP, and reports 100 * max(cos, 0) averaged over those
 frames (the usual CLIPScore). Writes clip.json into each directory and prints a prompt-by-run table.
 
@@ -13,6 +14,13 @@ import os
 
 import numpy as np
 import torch
+
+
+def read_mp4(path):
+    """Decoded frames of a saved video, (F, H, W, 3) uint8; used when the .npy was not kept."""
+    import imageio
+    with imageio.get_reader(path, "ffmpeg") as r:
+        return np.stack([f for f in r])
 
 
 def main():
@@ -34,14 +42,21 @@ def main():
         rows = []
         for i, prompt in enumerate(prompts):
             path = os.path.join(run, f"frames_{i}.npy")
-            if not os.path.exists(path):
+            if os.path.exists(path):
+                frames = np.load(path)
+            elif os.path.exists(os.path.join(run, f"video_{i}.mp4")):
+                path = os.path.join(run, f"video_{i}.mp4")
+                frames = read_mp4(path)
+            else:
                 continue
-            frames = np.load(path)[::args.every]
+            frames = frames[::args.every]
             inp = proc(text=[prompt], images=list(frames), return_tensors="pt", padding=True,
                        truncation=True).to(dev)
             with torch.no_grad():
                 img = model.get_image_features(pixel_values=inp["pixel_values"])
                 txt = model.get_text_features(input_ids=inp["input_ids"], attention_mask=inp["attention_mask"])
+            # transformers 5.x returns BaseModelOutputWithPooling with the projection in pooler_output
+            img, txt = (x if torch.is_tensor(x) else x.pooler_output for x in (img, txt))
             img = img / img.norm(dim=-1, keepdim=True)
             txt = txt / txt.norm(dim=-1, keepdim=True)
             per_frame = (100 * (img @ txt.T).squeeze(1).clamp(min=0)).cpu().numpy()

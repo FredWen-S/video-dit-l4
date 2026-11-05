@@ -1,0 +1,235 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "attn": "efficient",
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/efficient_33f"
+ },
+ "weights_gb": 3.394953216,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 2.030259585999829,
+  "calls": 8,
+  "total_s": 2.003866683959961,
+  "mean_ms": 250.48333549499512,
+  "peak_gb": 14.87867904
+ },
+ "warmup_s": 22.4571344699998,
+ "runs": [
+  {
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 261.65653838100025,
+   "other_s": 0.45099736537525814,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 250.32909375,
+     "mean_ms": 2503.2909375,
+     "peak_gb": 4.111090176
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.876447265625,
+     "mean_ms": 10876.447265625,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1280.0667938931297,
+    "sm_mhz_min": 1020.0,
+    "power_w_mean": 71.7268320610687,
+    "temp_c_max": 84.0,
+    "samples": 524
+   }
+  },
+  {
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 261.3917391990003,
+   "other_s": 0.38805340798467114,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 250.12075805664062,
+     "mean_ms": 2501.2075805664062,
+     "peak_gb": 4.111090176
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.882927734375,
+     "mean_ms": 10882.927734375,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1285.3250478011473,
+    "sm_mhz_min": 1050.0,
+    "power_w_mean": 71.73309751434036,
+    "temp_c_max": 79.0,
+    "samples": 523
+   }
+  },
+  {
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 261.5043499049998,
+   "other_s": 0.36567632101542813,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 250.26208862304688,
+     "mean_ms": 2502.620886230469,
+     "peak_gb": 4.111090176
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8765849609375,
+     "mean_ms": 10876.5849609375,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1279.7323135755257,
+    "sm_mhz_min": 1020.0,
+    "power_w_mean": 71.37988527724666,
+    "temp_c_max": 79.0,
+    "samples": 523
+   }
+  },
+  {
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 261.68404729799977,
+   "other_s": 0.3457120929216444,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 250.4475705566406,
+     "mean_ms": 2504.4757055664063,
+     "peak_gb": 4.111090176
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8907646484375,
+     "mean_ms": 10890.7646484375,
+     "peak_gb": 11.971986432
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1263.8358778625955,
+    "sm_mhz_min": 975.0,
+    "power_w_mean": 71.58471374045801,
+    "temp_c_max": 78.0,
+    "samples": 524
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.11.0+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.1",
+  "sdpa_flash": true
+ },
+ "kernels": {
+  "gpu_ms": 2493.1392879999994,
+  "share": {
+   "other": 0.2758183613365768,
+   "gemm": 0.2052273952212492,
+   "norm": 0.038938379603281954,
+   "attention": 0.4800158638388921
+  },
+  "ms": {
+   "other": 687.6535929999995,
+   "gemm": 511.6604819999997,
+   "norm": 97.07880400000006,
+   "attention": 1196.746409
+  },
+  "top_kernels": [
+   [
+    "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_t, cutlass::arch::Sm",
+    1196.746409,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    344.96516299999996,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    163.13217799999998,
+    "gemm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul> >(int, at::",
+    133.97393399999996,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, a",
+    108.138997,
+    "other"
+   ],
+   [
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:",
+    92.96398900000004,
+    "other"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambd",
+    84.23763300000003,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::bfloat16_copy_kernel_cuda(at:",
+    74.502443,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f",
+    67.933856,
+    "other"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, floa",
+    66.706678,
+    "norm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::Ge",
+    62.574929000000004,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::",
+    45.852133,
+    "other"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c10::BFloat",
+    30.372125999999994,
+    "norm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::BFloat16>, std::array<char*, 3ul> >(i",
+    15.947458000000003,
+    "other"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_128x128_ldg8_relu_f2f_stages_64x3_tn",
+    3.083045,
+    "gemm"
+   ]
+  ]
+ }
+}

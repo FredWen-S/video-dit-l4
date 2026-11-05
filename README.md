@@ -9,7 +9,7 @@ Inference profiling and optimization of a video diffusion transformer (Wan2.1-T2
 - [x] Baseline run on Colab L4: 3 of 7 predictions held (`results/L4_baseline.md`). Elementwise work in fp32 takes 28–39% of a forward, so the fusion kernel moves up the plan
 - [ ] Optimizations, one at a time
   - [x] `torch.compile` (per-block, default mode): 1.34× at 33 f and 1.23× at 81 f; 2 of 7 predictions held (`results/L4_compile.md`). Outputs diverge from eager (21–29 dB), so the next step is a rounding noise floor
-- [ ] Rounding noise floor: eager with memory-efficient attention against flash, plus a second seed for the sample-to-sample scale (`predictions_noisefloor_2026-11-04.md`, `colab/03_noise_floor.ipynb`)
+- [x] Rounding noise floor (`results/L4_noise_floor.md`): an exact attention-kernel swap moves the output to 36–39 dB and a different seed to 10–13 dB. Compile sits in between at 22–30 dB, so its divergence is not rounding noise. 2 of 6 measured predictions held. Next: find what compile changes (`emulate_precision_casts`, full-precision reference)
 - [ ] Quality metrics: frame hashes (`bench/hash_frames.py`), PSNR/LPIPS (`bench/compare_frames.py`) and CLIP score (`bench/clip_score.py`) are in place
 
 ## Plan

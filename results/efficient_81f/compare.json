@@ -1,0 +1,15 @@
+{
+ "ref": "results/flash_81f",
+ "test": "results/efficient_81f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 252,
+   "mean_abs": 0.7354361834902923,
+   "psnr_mean": 38.945682525634766,
+   "psnr_min": 33.39234924316406,
+   "lpips_mean": 0.00434865802526474
+  }
+ ]
+}

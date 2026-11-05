@@ -1,0 +1,42 @@
+{
+ "ref": "results/flash_33f",
+ "test": "results/seed1_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 38.30086878905238,
+   "psnr_mean": 12.973396301269531,
+   "psnr_min": 12.354296684265137,
+   "lpips_mean": 0.5231777429580688
+  },
+  {
+   "video": "frames_1.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 63.286022408581005,
+   "psnr_mean": 9.61720085144043,
+   "psnr_min": 9.398544311523438,
+   "lpips_mean": 0.7702363729476929
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 44.30731496151418,
+   "psnr_mean": 12.960653305053711,
+   "psnr_min": 12.937153816223145,
+   "lpips_mean": 0.6550700664520264
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 46.48884202097093,
+   "psnr_mean": 11.280770301818848,
+   "psnr_min": 11.114396095275879,
+   "lpips_mean": 0.6485958099365234
+  }
+ ]
+}

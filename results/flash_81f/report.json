@@ -1,0 +1,65 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "attn": "default",
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/flash_81f"
+ },
+ "weights_gb": 3.369787392,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.46457376799935446,
+  "calls": 2,
+  "total_s": 0.4554659881591797,
+  "mean_ms": 227.73299407958984,
+  "peak_gb": 14.853513216
+ },
+ "warmup_s": 54.01293925699974,
+ "runs": [
+  {
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 672.9529441809991,
+   "other_s": 0.7498069739677931,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 645.4975102539063,
+     "mean_ms": 6454.975102539062,
+     "peak_gb": 5.037199872
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.705626953125,
+     "mean_ms": 26705.626953125,
+     "peak_gb": 12.212794368
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1210.74294205052,
+    "sm_mhz_min": 885.0,
+    "power_w_mean": 71.806426448737,
+    "temp_c_max": 80.0,
+    "samples": 1346
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.11.0+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.1",
+  "sdpa_flash": true
+ }
+}
