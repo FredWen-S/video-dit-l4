@@ -16,6 +16,7 @@ Frames are saved as uint8 .npy so later optimizations can be scored against this
 
 usage: python bench/profile_baseline.py --frames 33 --steps 50 --kernels --out results/base_33f
        python bench/profile_baseline.py --frames 33 --compile blocks --kernels --out results/compile_33f
+       python bench/profile_baseline.py --frames 33 --attn efficient --kernels --out results/efficient_33f
 """
 import argparse
 import json
@@ -150,6 +151,9 @@ def main():
                     help="blocks: compile each transformer block (diffusers compile_repeated_blocks); "
                          "full: torch.compile the whole transformer forward")
     ap.add_argument("--no-fullgraph", action="store_true", help="allow graph breaks when compiling")
+    ap.add_argument("--attn", choices=["default", "flash", "efficient", "cudnn", "math"], default="default",
+                    help="force one SDPA backend inside the transformer only (the VAE keeps the default); "
+                         "default lets torch choose, which is flash. math materializes N^2 scores: OOM")
     ap.add_argument("--kernels", action="store_true", help="kernel-category split of one forward")
     ap.add_argument("--no-save-frames", action="store_true")
     ap.add_argument("--out", required=True)
@@ -176,6 +180,18 @@ def main():
         pipe.transformer.compile_repeated_blocks(fullgraph=fullgraph)
     elif args.compile == "full":
         pipe.transformer.forward = torch.compile(pipe.transformer.forward, fullgraph=fullgraph)
+
+    # Inside the timing wrapper, so the profiled forward (ph.orig) uses the same backend
+    if args.attn != "default":
+        from torch.nn.attention import SDPBackend, sdpa_kernel
+        backend = dict(flash=SDPBackend.FLASH_ATTENTION, efficient=SDPBackend.EFFICIENT_ATTENTION,
+                       cudnn=SDPBackend.CUDNN_ATTENTION, math=SDPBackend.MATH)[args.attn]
+        fwd = pipe.transformer.forward
+
+        def fwd_attn(*a, **k):
+            with sdpa_kernel(backend):
+                return fwd(*a, **k)
+        pipe.transformer.forward = fwd_attn
 
     ph = Phases()
     ph.wrap(pipe.text_encoder, "forward", "text_encoder")

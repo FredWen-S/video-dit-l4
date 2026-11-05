@@ -3,7 +3,8 @@
 
 For each frames_<i>.npy present in both directories, reports whether they are bit-identical,
 max and mean absolute pixel difference, per-frame PSNR (mean and worst frame) and, if the
-`lpips` package is installed, mean per-frame LPIPS (AlexNet). Writes compare.json to --test.
+`lpips` package is installed, mean per-frame LPIPS (AlexNet). Writes compare.json (or
+--out-name) to --test.
 
 usage: python bench/compare_frames.py --ref results/eager_33f --test results/compile_33f
 """
@@ -47,6 +48,7 @@ def main():
     ap.add_argument("--ref", required=True)
     ap.add_argument("--test", required=True)
     ap.add_argument("--no-lpips", action="store_true")
+    ap.add_argument("--out-name", default="compare.json", help="file written into --test")
     args = ap.parse_args()
 
     score = None if args.no_lpips else lpips_fn()
@@ -70,7 +72,7 @@ def main():
               + (f" LPIPS {r['lpips_mean']:.4f}" if "lpips_mean" in r else ""))
     if not rows:
         raise SystemExit("no frames_*.npy present in both directories")
-    with open(os.path.join(args.test, "compare.json"), "w") as f:
+    with open(os.path.join(args.test, args.out_name), "w") as f:
         json.dump(dict(ref=args.ref, test=args.test, videos=rows), f, indent=1)
 
 
