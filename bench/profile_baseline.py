@@ -17,6 +17,7 @@ Frames are saved as uint8 .npy so later optimizations can be scored against this
 usage: python bench/profile_baseline.py --frames 33 --steps 50 --kernels --out results/base_33f
        python bench/profile_baseline.py --frames 33 --compile blocks --kernels --out results/compile_33f
        python bench/profile_baseline.py --frames 33 --attn efficient --kernels --out results/efficient_33f
+       python bench/profile_baseline.py --frames 33 --compile blocks --attn-backend sage --kernels --out results/sage_33f
        python bench/profile_baseline.py --frames 33 --dtype fp32 --attn efficient --prompt-ids 0 3 --out results/fp32_33f
 """
 import argparse
@@ -32,6 +33,14 @@ import numpy as np  # noqa: E402
 import torch  # noqa: E402
 
 MODEL = "Wan-AI/Wan2.1-T2V-1.3B-Diffusers"
+
+
+def _version(pkg):
+    from importlib.metadata import PackageNotFoundError, version
+    try:
+        return version(pkg)
+    except PackageNotFoundError:
+        return None
 
 
 class Phases:
@@ -104,6 +113,9 @@ class SmiSampler:
 
 def kernel_category(name):
     n = name.lower()
+    # SageAttention's Q/K/V quantization and padding passes (memory-bound, part of its cost)
+    if "quant" in n or "transpose_pad_permute" in n:
+        return "attn_quant"
     if any(k in n for k in ("flash", "fmha", "attention", "attn", "sdpa")):
         return "attention"
     if any(k in n for k in ("gemm", "cutlass", "cublas", "xmma", "matmul", "_mma")):
@@ -159,6 +171,9 @@ def main():
     ap.add_argument("--dtype", choices=["bf16", "fp32"], default="bf16",
                     help="transformer weights and activations; fp32 upcasts the bf16 weights and turns TF32 off, "
                          "and needs --attn efficient (flash has no fp32 kernel)")
+    ap.add_argument("--attn-backend", default=None,
+                    help="diffusers attention backend for the transformer, e.g. sage or _sage_qk_int8_pv_fp16_cuda "
+                         "(set before compiling)")
     ap.add_argument("--attn", choices=["default", "flash", "efficient", "cudnn", "math"], default="default",
                     help="force one SDPA backend inside the transformer only (the VAE keeps the default); "
                          "default lets torch choose, which is flash. math materializes N^2 scores: OOM")
@@ -189,6 +204,9 @@ def main():
         pipe.transformer.to(torch.float32)
         torch.backends.cuda.matmul.allow_tf32 = False
         torch.backends.cudnn.allow_tf32 = False
+
+    if args.attn_backend:
+        pipe.transformer.set_attention_backend(args.attn_backend)
 
     # Compile before wrapping, so the timing wrapper stays outside the compiled region
     if args.emulate_precision_casts:
@@ -279,7 +297,8 @@ def main():
         env=dict(gpu=torch.cuda.get_device_name(), torch=torch.__version__,
                  diffusers=diffusers.__version__, transformers=transformers.__version__,
                  sdpa_flash=torch.backends.cuda.flash_sdp_enabled(),
-                 transformer_dtype=str(pipe.transformer.dtype), tf32=torch.backends.cuda.matmul.allow_tf32))
+                 transformer_dtype=str(pipe.transformer.dtype), tf32=torch.backends.cuda.matmul.allow_tf32,
+                 sageattention=_version("sageattention")))
     if args.kernels and ph.captured:
         a, k = ph.captured
         report["kernels"] = profile_forward(ph.orig["transformer"], a, k,
