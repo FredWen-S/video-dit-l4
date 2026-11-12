@@ -4,14 +4,15 @@ Notebook: `colab/05_sage_attention.ipynb` (commit d059d12). Predictions: `predic
 
 ## What happened
 
-- SageAttention was not installed. Every report has `sageattention: null`, the microbenchmark has only flash rows, and `sage_33f/`, `sage_81f/` and `sage_fp16pv_33f/` are empty. The zip has no build log, so the cause is not known. The likely one is an nvcc whose major version differs from torch's CUDA (torch 2.14.1+cu130); torch's extension builder refuses that.
+- SageAttention was not installed. Every report has `sageattention: null`, the microbenchmark has only flash rows, and `sage_33f/`, `sage_81f/` and `sage_fp16pv_33f/` are empty. The zip has no build log. My first guess was an nvcc version mismatch, and that was wrong. The next session's nvcc was 13.0, matching torch, and the build still failed with `'sizes' is not a member of 'at::symint'`. The cause: torch 2.14's `ATen/core/TensorBase.h` uses C++20 `requires` clauses, and SageAttention's `setup.py` compiles with `-std=c++17`. The notebook now switches the flag to `-std=c++20` before building (commit 1ced6c4).
 - The notebook did not stop after the failed build. The flash runs (compile at 33 f and 81 f, fp32 reference) completed, about 1.5 hours of L4 time.
 - The install cell ran `pip install -U diffusers`, which moved diffusers from 0.42.1 to **0.43.0**. torch (2.14.1+cu130) and transformers (5.22.2) are unchanged.
 
-S2–S8 are untested. Attempt 2 changes three things in the notebook:
+S2–S8 are untested. The notebook now has four changes:
 - diffusers is pinned to 0.42.1.
-- The build cell installs a matching nvcc from NVIDIA's apt repository when the versions differ.
-- The build cell writes the full log and raises an error when `sageattention` does not import.
+- The build cell installs a matching nvcc from NVIDIA's apt repository when the versions differ. This turned out to be unnecessary.
+- SageAttention is compiled as C++20.
+- The build cell writes the full log and raises an error when `sageattention` does not import. The second session stopped there after about 10 minutes.
 
 ## What the flash runs still show
 
