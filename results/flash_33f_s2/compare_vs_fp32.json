@@ -1,0 +1,24 @@
+{
+ "ref": "results/fp32_33f",
+ "test": "results/flash_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 243,
+   "mean_abs": 5.910162244439588,
+   "psnr_mean": 28.097309112548828,
+   "psnr_min": 26.761272430419922,
+   "lpips_mean": 0.028619183227419853
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 7.06933606396497,
+   "psnr_mean": 23.803813934326172,
+   "psnr_min": 23.13043785095215,
+   "lpips_mean": 0.10970162600278854
+  }
+ ]
+}

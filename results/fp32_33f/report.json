@@ -1,0 +1,193 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": [
+   0,
+   3
+  ],
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "fp32",
+  "attn": "efficient",
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/fp32_33f"
+ },
+ "weights_gb": 6.20991488,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.715101431000221,
+  "calls": 4,
+  "total_s": 0.7051683959960937,
+  "mean_ms": 176.29209899902344,
+  "peak_gb": 17.693640704
+ },
+ "warmup_s": 59.93656434100012,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 851.3115648329995,
+   "other_s": 0.3832064345619983,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 824.7726826171875,
+     "mean_ms": 8247.726826171875,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.15567578125,
+     "mean_ms": 26155.67578125,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1224.979448032883,
+    "sm_mhz_min": 675.0,
+    "power_w_mean": 71.58072225484439,
+    "temp_c_max": 78.0,
+    "samples": 1703
+   }
+  },
+  {
+   "prompt_id": 3,
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 851.7752590889995,
+   "other_s": 0.3680881905620481,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 825.2102138671875,
+     "mean_ms": 8252.102138671875,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.19695703125,
+     "mean_ms": 26196.95703125,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1222.6629477392837,
+    "sm_mhz_min": 810.0,
+    "power_w_mean": 71.46705226071639,
+    "temp_c_max": 80.0,
+    "samples": 1703
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.float32",
+  "tf32": false
+ },
+ "kernels": {
+  "gpu_ms": 8272.174348999999,
+  "share": {
+   "other": 0.08195271006128556,
+   "gemm": 0.4097115575676559,
+   "norm": 0.015425040577804689,
+   "attention": 0.49291069179325386
+  },
+  "ms": {
+   "other": 677.9271060000005,
+   "gemm": 3389.2054369999996,
+   "norm": 127.59862500000007,
+   "attention": 4077.4431809999987
+  },
+  "top_kernels": [
+   [
+    "fmha_cutlassF_f32_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<float, cutlass::arch::Sm80, true, 64, 1",
+    4077.4431809999987,
+    "attention"
+   ],
+   [
+    "ampere_sgemm_128x128_tn",
+    3373.293548000001,
+    "gemm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f",
+    223.87436300000002,
+    "other"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<float>, std::array<char*, 3ul>, false>(int",
+    164.43779800000004,
+    "other"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::GeluCUDAKernelImpl(at::TensorIteratorBase&, at::native::Ge",
+    127.214394,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::T",
+    115.32488200000003,
+    "other"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, floa",
+    65.26997199999998,
+    "norm"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, true>(int, float, float const*, float",
+    62.32865299999998,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::",
+    46.500341000000006,
+    "other"
+   ],
+   [
+    "ampere_sgemm_128x64_tn",
+    14.323534000000008,
+    "gemm"
+   ],
+   [
+    "void implicit_convolveNd_sgemm<float, 3, 128, 5, 5, 3, 3, 3, 1, false, false, true>(int, int, int, float const*, int, fl",
+    0.730113,
+    "gemm"
+   ],
+   [
+    "ampere_sgemm_64x64_tn",
+    0.496161,
+    "gemm"
+   ],
+   [
+    "void gemv2T_kernel_val<int, int, float, float, float, float, 128, 16, 4, 4, false, true, cublasGemvParamsEx<int, cublasG",
+    0.297281,
+    "gemm"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1ul>, false>(int, at:",
+    0.27123499999999984,
+    "other"
+   ],
+   [
+    "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, 2ul>, fals",
+    0.23577399999999996,
+    "other"
+   ]
+  ]
+ }
+}

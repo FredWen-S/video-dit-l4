@@ -1,0 +1,22 @@
+{
+ "model": "openai/clip-vit-large-patch14",
+ "every": 4,
+ "videos": [
+  {
+   "video": "prompt_0",
+   "source": "frames_0.npy",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "clip": 33.58538055419922,
+   "clip_min": 32.99112319946289,
+   "frames_scored": 9
+  },
+  {
+   "video": "prompt_3",
+   "source": "frames_3.npy",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "clip": 29.65241813659668,
+   "clip_min": 29.0925350189209,
+   "frames_scored": 9
+  }
+ ]
+}

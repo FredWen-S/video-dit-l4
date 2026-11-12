@@ -57,7 +57,7 @@ Speed, memory-efficient attention against flash in the same session:
 - Swapping one exact attention kernel for another moves the output to 36 dB at 33 f and 39 dB at 81 f, with LPIPS ≤ 0.011. In `figures/noise_floor_market_last_frame.png`:
   - top row: flash, memory-efficient, compile, seed 1;
   - bottom row: absolute difference from flash, ×4.
-  - The memory-efficient difference is fine speckle on edges and texture.
+  - The memory-efficient difference is fine speckle on edges and texture. The maps are made from the mp4s, which are only 32.6–34.9 dB from the exact frames, so part of this speckle is codec noise. The PSNR and LPIPS values come from `.npy` and are not affected.
   - The compile difference shows moved lanterns, a street light that is not in eager, and people in different places.
   - The seed change gives a different street.
 - At 81 f the gap is largest. Flash and memory-efficient attention give the same fox in the same pose. The compiled fox has turned to face the other way and has the detached extra tail (`figures/noise_floor_81f_fox_last_frame.png`: flash, memory-efficient, compile).

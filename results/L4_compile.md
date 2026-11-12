@@ -65,6 +65,8 @@ Eager in this session against the baseline run from the day before (`eager_33f/c
 - C4 predicted the direction correctly. C3 failed for the same reason.
 
 **3. Compiled and eager outputs diverge far more than rounding error, and one compiled video has a visible defect.**
+
+> Update 2026-11-11 (`L4_compile_diagnosis.md`): the divergence is Inductor keeping fused intermediates in fp32 where eager rounds them to bf16, and compile lands *closer* to an fp32 reference than eager does (fox 35.6 vs 28.1 dB, market 26.2 vs 23.8 dB).
 - Eager is deterministic, even across sessions (C7). So the whole difference comes from fused fp32 math rounding differently, amplified over 50 sampling steps.
 - The compiled videos show the same scenes with the same composition, but small details differ: positions in the crowd, lantern shapes, the fox's pose.
 - In the last frame of the 81-frame compiled fox video there is a detached extra tail floating above the fox. The eager video has no such defect. See `figures/compile_81f_fox_last_frame.png` (eager left, compiled right) and `figures/compile_vs_eager_frames.png`, where the rows alternate eager and compiled for the night market (33 f), the coast (33 f) and the fox (81 f).

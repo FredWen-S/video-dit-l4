@@ -10,7 +10,8 @@ Inference profiling and optimization of a video diffusion transformer (Wan2.1-T2
 - [ ] Optimizations, one at a time
   - [x] `torch.compile` (per-block, default mode): 1.34× at 33 f and 1.23× at 81 f; 2 of 7 predictions held (`results/L4_compile.md`). Outputs diverge from eager (21–29 dB), so the next step is a rounding noise floor
 - [x] Rounding noise floor (`results/L4_noise_floor.md`): an exact attention-kernel swap moves the output to 36–39 dB and a different seed to 10–13 dB. Compile sits in between at 22–30 dB, so its divergence is not rounding noise. 2 of 6 measured predictions held. Next: find what compile changes (`emulate_precision_casts`, full-precision reference)
-- [ ] What compile changes: compile with `emulate_precision_casts`, and an fp32 transformer as the reference for which bf16 path is more accurate (`predictions_compile_diag_2026-11-04.md`, `colab/04_compile_diagnosis.ipynb`)
+- [x] What compile changes (`results/L4_compile_diagnosis.md`): all of the divergence is cast elision (emulating eager's casts brings it to the 36 dB floor), and compile is closer to an fp32 reference than eager (35.6 vs 28.1 dB on the fox). 6 of 6 measured predictions held. The quality reference is now fp32; compile (1.37× on torch 2.14) is the new baseline
+- [ ] 8-bit attention on top of compile, judged against the fp32 reference
 - [ ] Quality metrics: frame hashes (`bench/hash_frames.py`), PSNR/LPIPS (`bench/compare_frames.py`) and CLIP score (`bench/clip_score.py`) are in place
 
 ## Plan

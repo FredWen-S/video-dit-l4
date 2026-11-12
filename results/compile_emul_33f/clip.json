@@ -1,0 +1,38 @@
+{
+ "model": "openai/clip-vit-large-patch14",
+ "every": 4,
+ "videos": [
+  {
+   "video": "prompt_0",
+   "source": "frames_0.npy",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "clip": 33.638492584228516,
+   "clip_min": 32.47001266479492,
+   "frames_scored": 9
+  },
+  {
+   "video": "prompt_1",
+   "source": "frames_1.npy",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "clip": 28.098087310791016,
+   "clip_min": 27.226591110229492,
+   "frames_scored": 9
+  },
+  {
+   "video": "prompt_2",
+   "source": "frames_2.npy",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "clip": 26.985435485839844,
+   "clip_min": 26.741344451904297,
+   "frames_scored": 9
+  },
+  {
+   "video": "prompt_3",
+   "source": "frames_3.npy",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "clip": 28.67513084411621,
+   "clip_min": 27.558246612548828,
+   "frames_scored": 9
+  }
+ ]
+}
