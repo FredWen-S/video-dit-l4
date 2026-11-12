@@ -1,0 +1,40 @@
+{
+ "gpu": "NVIDIA L4",
+ "torch": "2.14.1+cu130",
+ "rows": [
+  {
+   "tokens": 14040,
+   "inputs": "gaussian",
+   "backend": "flash",
+   "rel_l2_err": 0.0023158504627645016,
+   "ms": 19.111167907714844,
+   "tflops": 63.37211395181632,
+   "speedup_vs_flash": 1.0
+  },
+  {
+   "tokens": 14040,
+   "inputs": "k_bias",
+   "backend": "flash",
+   "rel_l2_err": 0.0023158248513936996,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 32760,
+   "inputs": "gaussian",
+   "backend": "flash",
+   "rel_l2_err": 0.002312823897227645,
+   "ms": 104.90628662109376,
+   "tflops": 62.85465958981107,
+   "speedup_vs_flash": 1.0
+  },
+  {
+   "tokens": 32760,
+   "inputs": "k_bias",
+   "backend": "flash",
+   "rel_l2_err": 0.002312650205567479,
+   "ms": null,
+   "tflops": null
+  }
+ ]
+}

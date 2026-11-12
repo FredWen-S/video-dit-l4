@@ -1,0 +1,165 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": null,
+  "attn": "default",
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/compile_81f_s3"
+ },
+ "weights_gb": 3.369787392,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.4825356669998655,
+  "calls": 2,
+  "total_s": 0.47175367736816404,
+  "mean_ms": 235.87683868408203,
+  "peak_gb": 14.853513216
+ },
+ "warmup_s": 63.748339904000204,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 559.549917796,
+   "other_s": 0.6489656475625907,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 532.0668779296875,
+     "mean_ms": 5320.668779296875,
+     "peak_gb": 4.348416512
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.83407421875,
+     "mean_ms": 26834.07421875,
+     "peak_gb": 12.211745792
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1149.8391420911528,
+    "sm_mhz_min": 885.0,
+    "power_w_mean": 71.25435210008938,
+    "temp_c_max": 81.0,
+    "samples": 1119
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.43.0",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": null
+ },
+ "kernels": {
+  "gpu_ms": 5377.389038,
+  "share": {
+   "other": 0.03461173995125773,
+   "gemm": 0.2615109656494229,
+   "norm": 0.03291442124593402,
+   "attention": 0.6709628731533853
+  },
+  "ms": {
+   "other": 186.12079099999997,
+   "gemm": 1406.2462000000012,
+   "norm": 176.99364799999992,
+   "attention": 3608.028398999999
+  },
+  "top_kernels": [
+   [
+    "void pytorch_flash::flash_fwd_kernel<Flash_fwd_kernel_traits<128, 128, 32, 4, false, false, cutlass::bfloat16_t, Flash_k",
+    3585.4352169999993,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    514.361945,
+    "gemm"
+   ],
+   [
+    "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16",
+    480.30915300000004,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    407.087393,
+    "gemm"
+   ],
+   [
+    "triton_poi_fused_gelu_view_6",
+    141.40729000000005,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_5",
+    60.051128999999996,
+    "norm"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_copy_mul_slice_sub_unbind_view_1",
+    51.87596300000001,
+    "norm"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_2",
+    37.92479699999999,
+    "norm"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_7",
+    35.27734100000001,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_0",
+    25.400287000000002,
+    "norm"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm__scaled_dot_product_flash_attention_permute_view_3",
+    22.372481,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_128x128_ldg8_relu_f2f_stages_64x3_tn",
+    3.2708770000000005,
+    "gemm"
+   ],
+   [
+    "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<float, float, false>(int, float, float const*, floa",
+    1.741472,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<float> >(at::",
+    1.740928,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f",
+    1.73952,
+    "other"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,24 @@
+{
+ "ref": "results/fp32_33f_s3",
+ "test": "results/compile_33f_d043",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 227,
+   "mean_abs": 2.3914892868994433,
+   "psnr_mean": 35.090946197509766,
+   "psnr_min": 32.18697738647461,
+   "lpips_mean": 0.007888353429734707
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 5.235135383279914,
+   "psnr_mean": 26.13144302368164,
+   "psnr_min": 25.3255558013916,
+   "lpips_mean": 0.07454705983400345
+  }
+ ]
+}
