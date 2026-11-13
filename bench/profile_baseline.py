@@ -206,6 +206,9 @@ def main():
         torch.backends.cudnn.allow_tf32 = False
 
     if args.attn_backend:
+        if "sage" in args.attn_backend:
+            import sage_ops  # bench/ is on sys.path when run as a script
+            sage_ops.install()  # SageAttention as one custom op, so fullgraph compile keeps it
         pipe.transformer.set_attention_backend(args.attn_backend)
 
     # Compile before wrapping, so the timing wrapper stays outside the compiled region
