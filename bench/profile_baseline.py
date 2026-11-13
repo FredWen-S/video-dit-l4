@@ -183,6 +183,9 @@ def main():
     ap.add_argument("--attn", choices=["default", "flash", "efficient", "cudnn", "math"], default="default",
                     help="force one SDPA backend inside the transformer only (the VAE keeps the default); "
                          "default lets torch choose, which is flash. math materializes N^2 scores: OOM")
+    ap.add_argument("--cache-threshold", type=float, default=None,
+                    help="first-block cache (bench/step_cache.py): skip blocks 1..N-1 when block 0's residual "
+                         "changed by less than this (relative mean abs) since the last computed forward")
     ap.add_argument("--kernels", action="store_true", help="kernel-category split of one forward")
     ap.add_argument("--no-save-frames", action="store_true")
     ap.add_argument("--out", required=True)
@@ -228,6 +231,13 @@ def main():
     elif args.compile == "full":
         pipe.transformer.forward = torch.compile(pipe.transformer.forward, fullgraph=fullgraph)
 
+    # After compiling: the cache wraps the compiled blocks and runs eagerly around them
+    cache = None
+    if args.cache_threshold is not None:
+        assert not args.kernels, "--kernels profiles one forward, which says nothing about a cached run"
+        from step_cache import FirstBlockCache
+        cache = FirstBlockCache(pipe.transformer, args.cache_threshold, branches=2 if args.guidance > 1 else 1)
+
     # Inside the timing wrapper, so the profiled forward (ph.orig) uses the same backend
     if args.attn != "default":
         from torch.nn.attention import SDPBackend, sdpa_kernel
@@ -265,6 +275,8 @@ def main():
     def run(i, steps):
         g = torch.Generator("cuda").manual_seed(args.seed)
         pe, ne = embeds[i]
+        if cache:
+            cache.reset()
         return pipe(prompt_embeds=pe, negative_prompt_embeds=ne, height=args.height, width=args.width,
                     num_frames=args.frames, num_inference_steps=steps, guidance_scale=args.guidance,
                     generator=g, output_type="np").frames[0]
@@ -291,6 +303,9 @@ def main():
         phases = ph.summary()
         other = wall - sum(p["total_s"] for p in phases.values())
         r = dict(prompt_id=pid, prompt=prompt, wall_s=wall, other_s=other, phases=phases, clocks=smi.stats)
+        if cache:
+            r["cache"] = cache.summary()
+            print(f"[{pid}] cache: computed {r['cache']['computed']} of {r['cache']['forwards']} forwards")
         results.append(r)
         print(f"[{pid}] {wall:.1f} s | " + " | ".join(
             f"{k} {v['total_s']:.1f} s x{v['calls']} peak {v['peak_gb']:.1f} GB" for k, v in phases.items())
