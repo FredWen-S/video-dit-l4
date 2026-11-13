@@ -1,0 +1,24 @@
+{
+ "ref": "results/fp32_33f_s3",
+ "test": "results/sage_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 212,
+   "mean_abs": 3.6175677042864542,
+   "psnr_mean": 32.04198455810547,
+   "psnr_min": 31.352733612060547,
+   "lpips_mean": 0.014977311715483665
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 7.873212518817987,
+   "psnr_mean": 23.230987548828125,
+   "psnr_min": 22.719444274902344,
+   "lpips_mean": 0.12070904672145844
+  }
+ ]
+}

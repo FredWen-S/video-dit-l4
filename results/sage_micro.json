@@ -1,0 +1,108 @@
+{
+ "gpu": "NVIDIA L4",
+ "torch": "2.14.1+cu130",
+ "rows": [
+  {
+   "tokens": 14040,
+   "inputs": "gaussian",
+   "backend": "flash",
+   "rel_l2_err": 0.0023158504627645016,
+   "ms": 19.597004699707032,
+   "tflops": 61.80103178819495,
+   "speedup_vs_flash": 1.0
+  },
+  {
+   "tokens": 14040,
+   "inputs": "gaussian",
+   "backend": "sage",
+   "rel_l2_err": 0.03897050395607948,
+   "ms": 12.311500549316406,
+   "tflops": 98.37266428642177,
+   "speedup_vs_flash": 1.5917641087864918
+  },
+  {
+   "tokens": 14040,
+   "inputs": "gaussian",
+   "backend": "sage_fp16pv",
+   "rel_l2_err": 0.011573368683457375,
+   "ms": 15.592037963867188,
+   "tflops": 77.67522842149464,
+   "speedup_vs_flash": 1.2568597347646862
+  },
+  {
+   "tokens": 14040,
+   "inputs": "k_bias",
+   "backend": "flash",
+   "rel_l2_err": 0.0023158248513936996,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 14040,
+   "inputs": "k_bias",
+   "backend": "sage",
+   "rel_l2_err": 0.038948919624090195,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 14040,
+   "inputs": "k_bias",
+   "backend": "sage_fp16pv",
+   "rel_l2_err": 0.011499632149934769,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 32760,
+   "inputs": "gaussian",
+   "backend": "flash",
+   "rel_l2_err": 0.002312823897227645,
+   "ms": 105.78790283203125,
+   "tflops": 62.330840841694666,
+   "speedup_vs_flash": 1.0
+  },
+  {
+   "tokens": 32760,
+   "inputs": "gaussian",
+   "backend": "sage",
+   "rel_l2_err": 0.03866575285792351,
+   "ms": 62.566400146484376,
+   "tflops": 105.38961677453182,
+   "speedup_vs_flash": 1.690810124673211
+  },
+  {
+   "tokens": 32760,
+   "inputs": "gaussian",
+   "backend": "sage_fp16pv",
+   "rel_l2_err": 0.0113867511972785,
+   "ms": 80.386865234375,
+   "tflops": 82.02644692233055,
+   "speedup_vs_flash": 1.315984925193902
+  },
+  {
+   "tokens": 32760,
+   "inputs": "k_bias",
+   "backend": "flash",
+   "rel_l2_err": 0.002312650205567479,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 32760,
+   "inputs": "k_bias",
+   "backend": "sage",
+   "rel_l2_err": 0.038651492446660995,
+   "ms": null,
+   "tflops": null
+  },
+  {
+   "tokens": 32760,
+   "inputs": "k_bias",
+   "backend": "sage_fp16pv",
+   "rel_l2_err": 0.01131738442927599,
+   "ms": null,
+   "tflops": null
+  }
+ ]
+}

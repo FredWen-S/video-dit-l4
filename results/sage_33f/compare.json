@@ -1,0 +1,42 @@
+{
+ "ref": "results/compile_33f_s3",
+ "test": "results/sage_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 211,
+   "mean_abs": 2.6155663708398085,
+   "psnr_mean": 33.371376037597656,
+   "psnr_min": 32.557273864746094,
+   "lpips_mean": 0.013114689849317074
+  },
+  {
+   "video": "frames_1.npy",
+   "identical": false,
+   "max_abs": 206,
+   "mean_abs": 4.275776950191013,
+   "psnr_mean": 29.582447052001953,
+   "psnr_min": 28.819107055664062,
+   "lpips_mean": 0.04097655415534973
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": false,
+   "max_abs": 233,
+   "mean_abs": 6.633481499692437,
+   "psnr_mean": 26.019384384155273,
+   "psnr_min": 25.941064834594727,
+   "lpips_mean": 0.08757487684488297
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 5.576133682578995,
+   "psnr_mean": 25.17170524597168,
+   "psnr_min": 25.000568389892578,
+   "lpips_mean": 0.07555217295885086
+  }
+ ]
+}

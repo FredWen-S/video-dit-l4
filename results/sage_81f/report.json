@@ -1,0 +1,168 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "sage",
+  "attn": "default",
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/sage_81f"
+ },
+ "weights_gb": 3.369787392,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.46644669299985253,
+  "calls": 2,
+  "total_s": 0.4570511474609375,
+  "mean_ms": 228.52557373046875,
+  "peak_gb": 14.853513216
+ },
+ "warmup_s": 50.7081712600002,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 419.79715538599976,
+   "other_s": 0.6252637844372657,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 392.3895302734375,
+     "mean_ms": 3923.895302734375,
+     "peak_gb": 4.348416512
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.782361328125,
+     "mean_ms": 26782.361328125,
+     "peak_gb": 12.211745792
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1155.5714285714287,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.0377380952381,
+    "temp_c_max": 80.0,
+    "samples": 840
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0"
+ },
+ "kernels": {
+  "gpu_ms": 3930.5964519999998,
+  "share": {
+   "other": 0.05688228611874804,
+   "gemm": 0.34114561934174353,
+   "norm": 0.05173044968697795,
+   "attn_quant": 0.02947390158586545,
+   "attention": 0.520767743266665
+  },
+  "ms": {
+   "other": 223.58131199999988,
+   "gemm": 1340.9057609999995,
+   "norm": 203.33152200000004,
+   "attn_quant": 115.8500129999999,
+   "attention": 2046.9278440000003
+  },
+  "top_kernels": [
+   [
+    "void qk_int_sv_f8_attn_kernel<128u, 64u, 32u, 64u, 128u, (DataType)1, (QuantGranularity)3, (QuantGranularity)3, float, t",
+    2046.9278440000003,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    473.67022399999985,
+    "gemm"
+   ],
+   [
+    "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_256x128_32x3_tn_align8>(cutlass_80_tensorop_bf16_s16",
+    465.02286899999996,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    397.71776399999993,
+    "gemm"
+   ],
+   [
+    "triton_poi_fused_gelu_view_6",
+    141.117881,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_5",
+    60.009036999999985,
+    "norm"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_copy_mul_slice_sub_unbind_view_1",
+    54.315149999999996,
+    "norm"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_2",
+    38.758131000000006,
+    "norm"
+   ],
+   [
+    "quant_query_per_thread_int8_kernel",
+    36.89467500000001,
+    "attn_quant"
+   ],
+   [
+    "void TransposePadPermuteKernel<128u, 64u, true, __nv_bfloat16>(__nv_bfloat16*, __nv_bfloat16*, unsigned int, unsigned in",
+    36.235350000000004,
+    "attn_quant"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_7",
+    35.029589,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_0",
+    25.864250999999992,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",
+    24.025975,
+    "other"
+   ],
+   [
+    "void MeanScaleKernel<64u, false, __nv_bfloat16>(__nv_bfloat16*, signed char*, float*, float*, float, unsigned int, unsig",
+    22.978330000000003,
+    "attn_quant"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_sage_attn_view_3",
+    22.422394,
+    "norm"
+   ]
+  ],
+  "note": "recategorized 2026-11-13 from the trace: the original split filed SageAttention's attention kernel under attn_quant (its name contains QuantGranularity)"
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "sage",
+  "attn": "default",
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/sage_33f"
+ },
+ "weights_gb": 3.394953216,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 2.0588929460000145,
+  "calls": 8,
+  "total_s": 2.0411146392822266,
+  "mean_ms": 255.13932991027832,
+  "peak_gb": 14.87867904
+ },
+ "warmup_s": 25.576314807000017,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 138.23702577800032,
+   "other_s": 0.4799836637425017,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 126.84105871582031,
+     "mean_ms": 1268.410587158203,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9159833984375,
+     "mean_ms": 10915.9833984375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1082.653429602888,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.70245487364622,
+    "temp_c_max": 82.0,
+    "samples": 277
+   }
+  },
+  {
+   "prompt_id": 1,
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 137.90275960500003,
+   "other_s": 0.3504504008984668,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 126.65102502441407,
+     "mean_ms": 1266.5102502441407,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9012841796875,
+     "mean_ms": 10901.2841796875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1084.4021739130435,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.73413043478261,
+    "temp_c_max": 78.0,
+    "samples": 276
+   }
+  },
+  {
+   "prompt_id": 2,
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 138.2027248010004,
+   "other_s": 0.3491236047113091,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 126.94892443847657,
+     "mean_ms": 1269.4892443847657,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9046767578125,
+     "mean_ms": 10904.6767578125,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1083.2490974729242,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.71924187725632,
+    "temp_c_max": 78.0,
+    "samples": 277
+   }
+  },
+  {
+   "prompt_id": 3,
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 138.4523602969998,
+   "other_s": 0.34984918860138237,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 127.18115954589844,
+     "mean_ms": 1271.8115954589844,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9213515625,
+     "mean_ms": 10921.3515625,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1077.4548736462093,
+    "sm_mhz_min": 915.0,
+    "power_w_mean": 71.65046931407943,
+    "temp_c_max": 78.0,
+    "samples": 277
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0"
+ },
+ "kernels": {
+  "gpu_ms": 1250.9191180000003,
+  "share": {
+   "other": 0.07379553375728323,
+   "gemm": 0.4876576216816604,
+   "norm": 0.06381619071233985,
+   "attn_quant": 0.035019677427297884,
+   "attention": 0.33971097642141873
+  },
+  "ms": {
+   "other": 92.31224399999999,
+   "gemm": 610.0202420000004,
+   "norm": 79.82889299999997,
+   "attn_quant": 43.806783999999986,
+   "attention": 424.950955
+  },
+  "top_kernels": [
+   [
+    "void qk_int_sv_f8_attn_kernel<128u, 64u, 32u, 64u, 128u, (DataType)1, (QuantGranularity)3, (QuantGranularity)3, float, t",
+    424.950955,
+    "attention"
+   ],
+   [
+    "ampere_bf16_s1688gemm_bf16_128x128_ldg8_relu_f2f_stages_32x1_tn",
+    411.05057100000033,
+    "gemm"
+   ],
+   [
+    "ampere_bf16_s16816gemm_bf16_256x128_ldg8_relu_f2f_stages_32x3_tn",
+    194.73956,
+    "gemm"
+   ],
+   [
+    "triton_poi_fused_gelu_view_6",
+    58.083800999999994,
+    "other"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_5",
+    23.216608,
+    "norm"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_copy_mul_slice_sub_unbind_view_1",
+    22.176059,
+    "norm"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_view_2",
+    16.137824999999996,
+    "norm"
+   ],
+   [
+    "void TransposePadPermuteKernel<128u, 64u, true, __nv_bfloat16>(__nv_bfloat16*, __nv_bfloat16*, unsigned int, unsigned in",
+    15.361725,
+    "attn_quant"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_7",
+    13.818878,
+    "other"
+   ],
+   [
+    "quant_query_per_thread_int8_kernel",
+    13.515170999999995,
+    "attn_quant"
+   ],
+   [
+    "triton_red_fused__to_copy_add_mul_native_layer_norm_split_0",
+    10.711071,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",
+    8.990718000000001,
+    "other"
+   ],
+   [
+    "quant_key_per_thread_int8_kernel",
+    7.9745289999999995,
+    "attn_quant"
+   ],
+   [
+    "void at::native::reduce_kernel<128, 4, at::native::ReduceOp<c10::BFloat16, at::native::MeanOps<c10::BFloat16, float, flo",
+    7.783395,
+    "other"
+   ],
+   [
+    "void MeanScaleKernel<64u, false, __nv_bfloat16>(__nv_bfloat16*, signed char*, float*, float*, float, unsigned int, unsig",
+    6.955358999999999,
+    "attn_quant"
+   ]
+  ],
+  "note": "recategorized 2026-11-13 from the trace: the original split filed SageAttention's attention kernel under attn_quant (its name contains QuantGranularity)"
+ }
+}

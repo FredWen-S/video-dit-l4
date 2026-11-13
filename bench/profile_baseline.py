@@ -113,11 +113,17 @@ class SmiSampler:
 
 def kernel_category(name):
     n = name.lower()
-    # SageAttention's Q/K/V quantization and padding passes (memory-bound, part of its cost)
-    if "quant" in n or "transpose_pad_permute" in n:
-        return "attn_quant"
-    if any(k in n for k in ("flash", "fmha", "attention", "attn", "sdpa")):
+    # Inductor kernels are named after the ops they fuse; one fuses the q/k RMSNorm with the
+    # attention op's input view, so check these before the attention keywords
+    if n.startswith("triton"):
+        return "norm" if "norm" in n else "other"
+    # Attention kernels first: SageAttention's kernel name contains "QuantGranularity"
+    if any(k in n for k in ("flash", "fmha", "_attn_kernel", "attention", "sdpa")):
         return "attention"
+    # SageAttention's Q/K/V quantization and layout passes (memory-bound, part of its cost).
+    # Its K smoothing (a mean and a subtraction) runs as generic ATen kernels and lands in "other".
+    if n.startswith("quant_") or "transposepadpermute" in n or "meanscale" in n:
+        return "attn_quant"
     if any(k in n for k in ("gemm", "cutlass", "cublas", "xmma", "matmul", "_mma")):
         return "gemm"
     if "norm" in n:

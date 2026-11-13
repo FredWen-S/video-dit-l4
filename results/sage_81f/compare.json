@@ -1,0 +1,15 @@
+{
+ "ref": "results/compile_81f_s3",
+ "test": "results/sage_81f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 251,
+   "mean_abs": 2.7478170525515724,
+   "psnr_mean": 27.812597274780273,
+   "psnr_min": 24.8643798828125,
+   "lpips_mean": 0.0372932143509388
+  }
+ ]
+}

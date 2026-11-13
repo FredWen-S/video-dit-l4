@@ -1,0 +1,103 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": [
+   0,
+   3
+  ],
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "fp32",
+  "attn_backend": null,
+  "attn": "efficient",
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/fp32_33f_s3"
+ },
+ "weights_gb": 6.20991488,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.7082834540001386,
+  "calls": 4,
+  "total_s": 0.698673080444336,
+  "mean_ms": 174.66827011108398,
+  "peak_gb": 17.693640704
+ },
+ "warmup_s": 60.66232555900024,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 855.2370793399996,
+   "other_s": 0.40801683999961824,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 828.648310546875,
+     "mean_ms": 8286.48310546875,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.180751953125,
+     "mean_ms": 26180.751953125,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1218.9649122807018,
+    "sm_mhz_min": 900.0,
+    "power_w_mean": 71.55050292397662,
+    "temp_c_max": 78.0,
+    "samples": 1710
+   }
+  },
+  {
+   "prompt_id": 3,
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 856.2508610320001,
+   "other_s": 0.3682125945000507,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 829.698609375,
+     "mean_ms": 8296.98609375,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.1840390625,
+     "mean_ms": 26184.0390625,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1215.2015186915887,
+    "sm_mhz_min": 885.0,
+    "power_w_mean": 71.56123247663551,
+    "temp_c_max": 80.0,
+    "samples": 1712
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.float32",
+  "tf32": false,
+  "sageattention": "2.2.0"
+ }
+}
