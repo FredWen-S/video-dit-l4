@@ -5,3 +5,4 @@ __pycache__/
 *.nsys-rep
 results/smoke/
 results/nsys_run/
+results/blind_ab/v/

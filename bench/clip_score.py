@@ -38,7 +38,8 @@ def main():
     jobs = []
     for run in args.runs:
         with open(os.path.join(run, "report.json")) as f:
-            jobs.append((run, [(r.get("prompt_id", i), r["prompt"]) for i, r in enumerate(json.load(f)["runs"])]))
+            jobs.append((run, [(r.get("key", r.get("prompt_id", i)), r["prompt"])
+                               for i, r in enumerate(json.load(f)["runs"])]))  # key: multi-seed runs
     source = args.source
     if source == "auto":
         has_npy = all(os.path.exists(os.path.join(run, f"frames_{i}.npy")) for run, ps in jobs for i, _ in ps)

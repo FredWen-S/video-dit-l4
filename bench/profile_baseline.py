@@ -163,6 +163,9 @@ def main():
     ap.add_argument("--steps", type=int, default=50)
     ap.add_argument("--guidance", type=float, default=5.0)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--seeds", type=int, nargs="+", default=None,
+                    help="several seeds in one process (one model load and compile); videos are named "
+                         "<prompt>_s<seed>, e.g. frames_3_s1.npy")
     ap.add_argument("--prompts", default=os.path.join(os.path.dirname(__file__), "prompts.txt"))
     ap.add_argument("--n-prompts", type=int, default=None, help="use only the first n prompts")
     ap.add_argument("--prompt-ids", type=int, nargs="+", default=None,
@@ -272,8 +275,10 @@ def main():
     print(f"weights {weights_all_gb:.1f} GB with text encoder, {weights_gb:.1f} GB without | "
           f"encoded {len(prompts)} prompts in {encode['wall_s']:.1f} s")
 
-    def run(i, steps):
-        g = torch.Generator("cuda").manual_seed(args.seed)
+    seeds = args.seeds or [args.seed]
+
+    def run(i, steps, seed=seeds[0]):
+        g = torch.Generator("cuda").manual_seed(seed)
         pe, ne = embeds[i]
         if cache:
             cache.reset()
@@ -291,29 +296,32 @@ def main():
         print(f"warmup ({args.warmup_steps} steps, compile={args.compile}): {warmup_s:.1f} s")
 
     results = []
-    for i, (pid, prompt) in enumerate(zip(ids, prompts)):
+    # One seed keeps the old names (frames_3.npy); several seeds name videos by prompt and seed (frames_3_s1.npy)
+    jobs = [(seed, i, pid, prompt) for seed in seeds for i, (pid, prompt) in enumerate(zip(ids, prompts))]
+    for j, (seed, i, pid, prompt) in enumerate(jobs):
+        key = f"{pid}_s{seed}" if len(seeds) > 1 else f"{pid}"
         ph.reset()
-        ph.capture = "transformer" if (args.kernels and i == len(prompts) - 1) else None
+        ph.capture = "transformer" if (args.kernels and j == len(jobs) - 1) else None
         torch.cuda.synchronize()
         with SmiSampler() as smi:
             t0 = time.perf_counter()
-            frames = run(i, args.steps)
+            frames = run(i, args.steps, seed)
             torch.cuda.synchronize()
             wall = time.perf_counter() - t0
         phases = ph.summary()
         other = wall - sum(p["total_s"] for p in phases.values())
-        r = dict(prompt_id=pid, prompt=prompt, wall_s=wall, other_s=other, phases=phases, clocks=smi.stats)
+        r = dict(prompt_id=pid, seed=seed, key=key, prompt=prompt, wall_s=wall, other_s=other, phases=phases, clocks=smi.stats)
         if cache:
             r["cache"] = cache.summary()
-            print(f"[{pid}] cache: computed {r['cache']['computed']} of {r['cache']['forwards']} forwards")
+            print(f"[{key}] cache: computed {r['cache']['computed']} of {r['cache']['forwards']} forwards")
         results.append(r)
-        print(f"[{pid}] {wall:.1f} s | " + " | ".join(
+        print(f"[{key}] {wall:.1f} s | " + " | ".join(
             f"{k} {v['total_s']:.1f} s x{v['calls']} peak {v['peak_gb']:.1f} GB" for k, v in phases.items())
             + f" | other {other:.1f} s | SM {smi.stats.get('sm_mhz_mean', 0):.0f} MHz")
         u8 = (np.clip(frames, 0, 1) * 255).round().astype(np.uint8)
         if not args.no_save_frames:
-            np.save(os.path.join(args.out, f"frames_{pid}.npy"), u8)
-        export_to_video(list(frames), os.path.join(args.out, f"video_{pid}.mp4"), fps=16)
+            np.save(os.path.join(args.out, f"frames_{key}.npy"), u8)
+        export_to_video(list(frames), os.path.join(args.out, f"video_{key}.mp4"), fps=16)
 
     report = dict(
         config=vars(args), weights_gb=weights_gb, weights_with_text_encoder_gb=weights_all_gb,
