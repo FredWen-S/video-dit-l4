@@ -1,0 +1,42 @@
+{
+ "frames_0.npy": {
+  "sha256": "2ae5409b490d81613ec14479011f189d515d5edebb68e6d4ea8dcb4f675fbe9b",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_1.npy": {
+  "sha256": "dad9e41892e185cfdea026740435c2976adcedbd2eb870a6884c3497848fa360",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_2.npy": {
+  "sha256": "92669b62422970fb8556429786cc95cc6d835639d8eaa8c1559eb418565db18f",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_3.npy": {
+  "sha256": "82fe8e8e2ea9d20acea772d72e6b34b96c51125f8e45646a545afcec4bd84a06",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ }
+}

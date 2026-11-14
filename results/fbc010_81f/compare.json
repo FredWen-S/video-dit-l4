@@ -1,0 +1,15 @@
+{
+ "ref": "results/pv16_81f",
+ "test": "results/fbc010_81f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 22.50996317358803,
+   "psnr_mean": 17.900007247924805,
+   "psnr_min": 16.377399444580078,
+   "lpips_mean": 0.28593096137046814
+  }
+ ]
+}

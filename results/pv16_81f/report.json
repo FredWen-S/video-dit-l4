@@ -1,0 +1,74 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "_sage_qk_int8_pv_fp16_cuda",
+  "attn": "default",
+  "cache_threshold": null,
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/pv16_81f"
+ },
+ "weights_gb": 3.369787392,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 1.1868158930010395,
+  "calls": 2,
+  "total_s": 1.1640288848876954,
+  "mean_ms": 582.0144424438477,
+  "peak_gb": 14.853513216
+ },
+ "warmup_s": 60.344857690000936,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 469.5871345250016,
+   "other_s": 0.7235554234391088,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 442.3176552734375,
+     "mean_ms": 4423.176552734375,
+     "peak_gb": 4.348416512
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.545923828125,
+     "mean_ms": 26545.923828125,
+     "peak_gb": 12.211745792
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1178.7380191693292,
+    "sm_mhz_min": 900.0,
+    "power_w_mean": 70.93279020234291,
+    "temp_c_max": 79.0,
+    "samples": 939
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0"
+ }
+}
