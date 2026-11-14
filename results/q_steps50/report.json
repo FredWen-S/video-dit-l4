@@ -1,0 +1,517 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "_sage_qk_int8_pv_fp16_cuda",
+  "attn": "default",
+  "cache_threshold": null,
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/q_steps50"
+ },
+ "weights_gb": 3.394953216,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 2.1014227999999093,
+  "calls": 8,
+  "total_s": 2.0628949966430663,
+  "mean_ms": 257.8618745803833,
+  "peak_gb": 14.87867904
+ },
+ "warmup_s": 32.95152523799993,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "seed": 0,
+   "key": "0_s0",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 147.1759865229999,
+   "other_s": 0.43643122514833976,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.84685705566406,
+     "mean_ms": 1358.4685705566405,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8926982421875,
+     "mean_ms": 10892.6982421875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1114.322033898305,
+    "sm_mhz_min": 915.0,
+    "power_w_mean": 71.35708474576272,
+    "temp_c_max": 82.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 0,
+   "key": "1_s0",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 147.2304757070001,
+   "other_s": 0.34550768942199284,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.00326098632812,
+     "mean_ms": 1360.0326098632813,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.88170703125,
+     "mean_ms": 10881.70703125,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1094.6949152542372,
+    "sm_mhz_min": 870.0,
+    "power_w_mean": 71.3864406779661,
+    "temp_c_max": 79.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 0,
+   "key": "2_s0",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 147.12351405200002,
+   "other_s": 0.3420228410625157,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.907669921875,
+     "mean_ms": 1359.07669921875,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8738212890625,
+     "mean_ms": 10873.8212890625,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1113.1016949152543,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.25616949152543,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 0,
+   "key": "3_s0",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 147.22317385100018,
+   "other_s": 0.3441687240470799,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.98326000976562,
+     "mean_ms": 1359.8326000976563,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8957451171875,
+     "mean_ms": 10895.7451171875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1115.2881355932204,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.23284745762713,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 0,
+   "seed": 1,
+   "key": "0_s1",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 147.13593958399997,
+   "other_s": 0.3431491787265486,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.89910974121094,
+     "mean_ms": 1358.9910974121094,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8936806640625,
+     "mean_ms": 10893.6806640625,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1110.9661016949153,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.35332203389832,
+    "temp_c_max": 79.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 1,
+   "key": "1_s1",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 147.36368893500003,
+   "other_s": 0.33713607855472105,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.1330108642578,
+     "mean_ms": 1361.3301086425781,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8935419921875,
+     "mean_ms": 10893.5419921875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1110.050847457627,
+    "sm_mhz_min": 960.0,
+    "power_w_mean": 71.40738983050846,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 1,
+   "key": "2_s1",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 147.65947518799976,
+   "other_s": 0.34074911378098705,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.42629248046876,
+     "mean_ms": 1364.2629248046876,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.89243359375,
+     "mean_ms": 10892.43359375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1098.9527027027027,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.41209459459459,
+    "temp_c_max": 78.0,
+    "samples": 296
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 1,
+   "key": "3_s1",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 147.21064607800008,
+   "other_s": 0.34184639538290185,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.9901922607422,
+     "mean_ms": 1359.901922607422,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.878607421875,
+     "mean_ms": 10878.607421875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1112.7966101694915,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.30108474576272,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 0,
+   "seed": 2,
+   "key": "0_s2",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 146.75440498600028,
+   "other_s": 0.34172456607839763,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.55300561523438,
+     "mean_ms": 1355.5300561523438,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8596748046875,
+     "mean_ms": 10859.6748046875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1107.9591836734694,
+    "sm_mhz_min": 915.0,
+    "power_w_mean": 71.12159863945578,
+    "temp_c_max": 78.0,
+    "samples": 294
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 2,
+   "key": "1_s2",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 147.0923815150004,
+   "other_s": 0.3436687464457009,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.8601492919922,
+     "mean_ms": 1358.6014929199218,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8885634765625,
+     "mean_ms": 10888.5634765625,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1104.8135593220338,
+    "sm_mhz_min": 915.0,
+    "power_w_mean": 71.34745762711864,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 2,
+   "key": "2_s2",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 147.31641208700012,
+   "other_s": 0.3392183614141686,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.08728552246095,
+     "mean_ms": 1360.8728552246093,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.889908203125,
+     "mean_ms": 10889.908203125,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1108.2711864406779,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.35240677966101,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 2,
+   "key": "3_s2",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 147.53608371000018,
+   "other_s": 0.34268502835953996,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.30807934570313,
+     "mean_ms": 1363.0807934570312,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8853193359375,
+     "mean_ms": 10885.3193359375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1103.3898305084747,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.37105084745762,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 0,
+   "seed": 3,
+   "key": "0_s3",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 146.89365158200007,
+   "other_s": 0.33675656246882113,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.68023974609375,
+     "mean_ms": 1356.8023974609375,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8766552734375,
+     "mean_ms": 10876.6552734375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1109.4897959183672,
+    "sm_mhz_min": 960.0,
+    "power_w_mean": 71.05302721088435,
+    "temp_c_max": 79.0,
+    "samples": 294
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 3,
+   "key": "1_s3",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 146.99925526800007,
+   "other_s": 0.34206386175006287,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 135.7723486328125,
+     "mean_ms": 1357.723486328125,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8848427734375,
+     "mean_ms": 10884.8427734375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1104.234693877551,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.33561224489796,
+    "temp_c_max": 79.0,
+    "samples": 294
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 3,
+   "key": "2_s3",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 147.22417177099987,
+   "other_s": 0.3424088315467486,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.00777954101562,
+     "mean_ms": 1360.0777954101563,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8739833984375,
+     "mean_ms": 10873.9833984375,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1097.4406779661017,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.31294915254237,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 3,
+   "key": "3_s3",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 147.3527480429998,
+   "other_s": 0.3433458213200993,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 136.1182655029297,
+     "mean_ms": 1361.182655029297,
+     "peak_gb": 3.815277056
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.89113671875,
+     "mean_ms": 10891.13671875,
+     "peak_gb": 11.970937856
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1105.9830508474577,
+    "sm_mhz_min": 930.0,
+    "power_w_mean": 71.36949152542373,
+    "temp_c_max": 78.0,
+    "samples": 295
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0"
+ }
+}

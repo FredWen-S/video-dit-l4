@@ -1,0 +1,162 @@
+{
+ "frames_0_s0.npy": {
+  "sha256": "ba81a9c11580ee6a62688b856cbf4a1e5ade7219588facb2d8945c6844ebcc44",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_0_s1.npy": {
+  "sha256": "f829749c224d10243d30869a283baa6cc8561b9cae2ae81652d68fa2eaf14a37",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_0_s2.npy": {
+  "sha256": "0947a5de6d6a95c1ff750f206846f67e6f354ca95200440ebd5dbd5b4efab7c4",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_0_s3.npy": {
+  "sha256": "4addafd7497ed42f0c8598ac6d2861445d10a34b0e2e47979b8fb19aa177c342",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_1_s0.npy": {
+  "sha256": "ac768d6a59f4d21d6cf0fea3139ff8097ef111391a216ae29825828d9fdb4eaa",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_1_s1.npy": {
+  "sha256": "db99b082e5f8246ba4d9ce652c6e1c6fcf6c990a15971d14c270614a3886602e",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_1_s2.npy": {
+  "sha256": "7b000bd68597d2fd490ae021676d79c2e9e95dd66e027f44feb84641098e8029",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_1_s3.npy": {
+  "sha256": "6aaeb95c63329f60582d90da8297b289e0bcbd237a3ee6b2a018e3f84fc7dc36",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_2_s0.npy": {
+  "sha256": "503329e2e02731c7ac0fefb6e775fb44806fbba2d566d697fda20dc0a58dbca3",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_2_s1.npy": {
+  "sha256": "f62284e86a4b21c4be184346cc720a25f308bc7a6222a75622c5dffe5e28af5d",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_2_s2.npy": {
+  "sha256": "3a50eb500b4478c8f252ea629bcf8e29f14e880e8189f1cad24bb2e032095b88",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_2_s3.npy": {
+  "sha256": "5de2c29f0aaf391a4eff9e3225bf114b7aefa35695a96407cb115aab07670e01",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_3_s0.npy": {
+  "sha256": "1a11c0ff0ce5a11fd5ab4d279d7aaa637d93bbba5769ef21a4cee90e65f7a48f",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_3_s1.npy": {
+  "sha256": "304136ccb61b2a3ef9291325fa4e52657767f8720cefe5598c3502fb00db11ab",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_3_s2.npy": {
+  "sha256": "375f6c8abf305e1bc2fc429360540c6ad62f0c40a88a7eb733373127177c3b63",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ },
+ "frames_3_s3.npy": {
+  "sha256": "7ef73fb236689b80ccdcbd741dbe926568ff826bc55ec056e760435b18dceeb7",
+  "shape": [
+   33,
+   480,
+   832,
+   3
+  ],
+  "dtype": "uint8"
+ }
+}
