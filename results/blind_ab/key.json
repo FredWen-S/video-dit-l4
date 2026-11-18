@@ -1,0 +1,290 @@
+{
+ "473a89eb": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "0_s0",
+  "base_side": "right"
+ },
+ "46b774cf": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "0_s1",
+  "base_side": "right"
+ },
+ "2b37135c": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "0_s2",
+  "base_side": "right"
+ },
+ "8c64382b": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "0_s3",
+  "base_side": "right"
+ },
+ "4305150d": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "1_s0",
+  "base_side": "right"
+ },
+ "d61b1717": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "1_s1",
+  "base_side": "left"
+ },
+ "664c4d65": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "1_s2",
+  "base_side": "right"
+ },
+ "c9f9fa8f": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "1_s3",
+  "base_side": "right"
+ },
+ "fddb84d4": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "2_s0",
+  "base_side": "left"
+ },
+ "7d3b2af0": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "2_s1",
+  "base_side": "left"
+ },
+ "c4466f32": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "2_s2",
+  "base_side": "left"
+ },
+ "305c37ef": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "2_s3",
+  "base_side": "right"
+ },
+ "e1c29ba8": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "3_s0",
+  "base_side": "left"
+ },
+ "dd5cb74d": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "3_s1",
+  "base_side": "left"
+ },
+ "d509d6ae": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "3_s2",
+  "base_side": "right"
+ },
+ "b8434058": {
+  "base": "results/q_steps50",
+  "test": "results/q_steps20",
+  "video": "3_s3",
+  "base_side": "left"
+ },
+ "8312abdb": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "0_s0",
+  "base_side": "left"
+ },
+ "e14be615": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "0_s1",
+  "base_side": "right"
+ },
+ "b9d8ac2d": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "0_s2",
+  "base_side": "right"
+ },
+ "d93c7873": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "0_s3",
+  "base_side": "right"
+ },
+ "9f03b659": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "1_s0",
+  "base_side": "left"
+ },
+ "6df9d6a1": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "1_s1",
+  "base_side": "left"
+ },
+ "23966ffa": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "1_s2",
+  "base_side": "right"
+ },
+ "9e26be01": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "1_s3",
+  "base_side": "right"
+ },
+ "6dd12a22": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "2_s0",
+  "base_side": "left"
+ },
+ "5c38777b": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "2_s1",
+  "base_side": "right"
+ },
+ "c1984378": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "2_s2",
+  "base_side": "right"
+ },
+ "9732d6b6": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "2_s3",
+  "base_side": "left"
+ },
+ "8c208037": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "3_s0",
+  "base_side": "left"
+ },
+ "faef837a": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "3_s1",
+  "base_side": "right"
+ },
+ "13d3318e": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "3_s2",
+  "base_side": "right"
+ },
+ "8af4a24e": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc010",
+  "video": "3_s3",
+  "base_side": "right"
+ },
+ "f0f3c170": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "0_s0",
+  "base_side": "right"
+ },
+ "8bd8b899": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "0_s1",
+  "base_side": "left"
+ },
+ "47b086ae": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "0_s2",
+  "base_side": "right"
+ },
+ "0c1f5897": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "0_s3",
+  "base_side": "left"
+ },
+ "5402e689": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "1_s0",
+  "base_side": "right"
+ },
+ "0d6b0e0a": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "1_s1",
+  "base_side": "right"
+ },
+ "846b0036": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "1_s2",
+  "base_side": "left"
+ },
+ "5c4501b7": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "1_s3",
+  "base_side": "right"
+ },
+ "97911196": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "2_s0",
+  "base_side": "left"
+ },
+ "c703a326": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "2_s1",
+  "base_side": "right"
+ },
+ "bdccf426": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "2_s2",
+  "base_side": "left"
+ },
+ "8e7698e4": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "2_s3",
+  "base_side": "right"
+ },
+ "caeb4f8a": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "3_s0",
+  "base_side": "right"
+ },
+ "58c3f51b": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "3_s1",
+  "base_side": "left"
+ },
+ "6daa5b1c": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "3_s2",
+  "base_side": "right"
+ },
+ "9d7daa2f": {
+  "base": "results/q_steps50",
+  "test": "results/q_fbc020",
+  "video": "3_s3",
+  "base_side": "left"
+ }
+}
