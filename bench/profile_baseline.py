@@ -43,6 +43,13 @@ def _version(pkg):
         return None
 
 
+def _cmd(c):
+    try:
+        return subprocess.run(c, shell=True, capture_output=True, text=True, timeout=20).stdout.strip() or None
+    except Exception:
+        return None
+
+
 class Phases:
     """Wraps module methods with CUDA events, NVTX ranges and peak-memory tracking."""
 
@@ -186,6 +193,9 @@ def main():
     ap.add_argument("--attn", choices=["default", "flash", "efficient", "cudnn", "math"], default="default",
                     help="force one SDPA backend inside the transformer only (the VAE keeps the default); "
                          "default lets torch choose, which is flash. math materializes N^2 scores: OOM")
+    ap.add_argument("--fp8-linears", choices=["rowwise", "tensorwise"], default=None,
+                    help="W8A8 FP8 (e4m3) for every nn.Linear in the transformer blocks (bench/fp8_linear.py)")
+    ap.add_argument("--fp8-fast-accum", action="store_true", help="cuBLASLt fast (lower-precision) FP8 accumulation")
     ap.add_argument("--cache-threshold", type=float, default=None,
                     help="first-block cache (bench/step_cache.py): skip blocks 1..N-1 when block 0's residual "
                          "changed by less than this (relative mean abs) since the last computed forward")
@@ -222,6 +232,14 @@ def main():
             import sage_ops  # bench/ is on sys.path when run as a script
             sage_ops.install()  # SageAttention as one custom op, so fullgraph compile keeps it
         pipe.transformer.set_attention_backend(args.attn_backend)
+
+    fp8_replaced = None
+    if args.fp8_linears:
+        import fp8_linear  # bench/ is on sys.path when run as a script
+        fp8_replaced = fp8_linear.install(pipe.transformer.blocks, rowwise=args.fp8_linears == "rowwise",
+                                          fast_accum=args.fp8_fast_accum)
+        torch.cuda.empty_cache()
+        print(f"fp8 linears ({args.fp8_linears}): replaced {fp8_replaced} nn.Linear in the blocks")
 
     # Compile before wrapping, so the timing wrapper stays outside the compiled region
     if args.emulate_precision_casts:
@@ -330,7 +348,10 @@ def main():
                  diffusers=diffusers.__version__, transformers=transformers.__version__,
                  sdpa_flash=torch.backends.cuda.flash_sdp_enabled(),
                  transformer_dtype=str(pipe.transformer.dtype), tf32=torch.backends.cuda.matmul.allow_tf32,
-                 sageattention=_version("sageattention")))
+                 sageattention=_version("sageattention"), triton=_version("triton"),
+                 cuda_runtime=torch.version.cuda, cudnn=torch.backends.cudnn.version(),
+                 driver=_cmd("nvidia-smi --query-gpu=driver_version --format=csv,noheader"),
+                 nvcc=_cmd("nvcc --version | tail -1"), fp8_linears_replaced=fp8_replaced))
     if args.kernels and ph.captured:
         a, k = ph.captured
         report["kernels"] = profile_forward(ph.orig["transformer"], a, k,
