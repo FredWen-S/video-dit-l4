@@ -1,0 +1,24 @@
+{
+ "ref": "results/f_fp32_33f",
+ "test": "results/f_fp8tensor_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 11.02977784657472,
+   "psnr_mean": 21.189748764038086,
+   "psnr_min": 20.524879455566406,
+   "lpips_mean": 0.11054166406393051
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 8.555657435735561,
+   "psnr_mean": 22.479976654052734,
+   "psnr_min": 22.31936264038086,
+   "lpips_mean": 0.13370683789253235
+  }
+ ]
+}

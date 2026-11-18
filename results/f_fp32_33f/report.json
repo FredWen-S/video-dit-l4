@@ -1,0 +1,117 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": null,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": [
+   0,
+   3
+  ],
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "fp32",
+  "attn_backend": null,
+  "attn": "efficient",
+  "fp8_linears": null,
+  "fp8_fast_accum": false,
+  "cache_threshold": null,
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/f_fp32_33f"
+ },
+ "weights_gb": 6.20991488,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.728402006000124,
+  "calls": 4,
+  "total_s": 0.7123834686279297,
+  "mean_ms": 178.09586715698242,
+  "peak_gb": 17.693640704
+ },
+ "warmup_s": 60.488799521000146,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "seed": 0,
+   "key": "0",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 852.3414856870004,
+   "other_s": 0.44427572606298327,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 825.7797529296874,
+     "mean_ms": 8257.797529296875,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.11745703125,
+     "mean_ms": 26117.45703125,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1223.2609970674487,
+    "sm_mhz_min": 675.0,
+    "power_w_mean": 71.47395307917888,
+    "temp_c_max": 78.0,
+    "samples": 1705
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 0,
+   "key": "3",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 853.582558221,
+   "other_s": 0.4172574397500739,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 827.028005859375,
+     "mean_ms": 8270.28005859375,
+     "peak_gb": 7.620889088
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.137294921875,
+     "mean_ms": 26137.294921875,
+     "peak_gb": 19.674576384
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1220.3954305799648,
+    "sm_mhz_min": 675.0,
+    "power_w_mean": 71.47476859988284,
+    "temp_c_max": 79.0,
+    "samples": 1707
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.float32",
+  "tf32": false,
+  "sageattention": "2.2.0",
+  "triton": "3.8.0",
+  "cuda_runtime": "13.0",
+  "cudnn": 92800,
+  "driver": "580.82.07",
+  "nvcc": "Build cuda_13.0.r13.0/compiler.36424714_0",
+  "fp8_linears_replaced": null
+ }
+}

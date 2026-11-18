@@ -1,0 +1,42 @@
+{
+ "ref": "results/f_base_33f",
+ "test": "results/f_fp8tensor_33f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 9.820283564814815,
+   "psnr_mean": 21.560924530029297,
+   "psnr_min": 20.864723205566406,
+   "lpips_mean": 0.10555486381053925
+  },
+  {
+   "video": "frames_1.npy",
+   "identical": false,
+   "max_abs": 215,
+   "mean_abs": 7.858055843895688,
+   "psnr_mean": 25.205331802368164,
+   "psnr_min": 24.66656494140625,
+   "lpips_mean": 0.1076565831899643
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 13.667081016495079,
+   "psnr_mean": 20.930335998535156,
+   "psnr_min": 20.83846664428711,
+   "lpips_mean": 0.21027684211730957
+  },
+  {
+   "video": "frames_3.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 8.304972855558793,
+   "psnr_mean": 22.92641258239746,
+   "psnr_min": 22.67889404296875,
+   "lpips_mean": 0.11768952012062073
+  }
+ ]
+}

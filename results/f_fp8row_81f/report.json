@@ -1,0 +1,179 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 81,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": null,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": 1,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "_sage_qk_int8_pv_fp16_cuda",
+  "attn": "default",
+  "fp8_linears": "rowwise",
+  "fp8_fast_accum": false,
+  "cache_threshold": null,
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/f_fp8row_81f"
+ },
+ "weights_gb": 1.980536832,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 1.2396778689999337,
+  "calls": 2,
+  "total_s": 1.213048858642578,
+  "mean_ms": 606.5244293212891,
+  "peak_gb": 13.464262656
+ },
+ "warmup_s": 63.777235425999606,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "seed": 0,
+   "key": "0",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 593.8018960660002,
+   "other_s": 0.7066099331876785,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 566.3222294921875,
+     "mean_ms": 5663.222294921875,
+     "peak_gb": 3.252826624
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.773056640625,
+     "mean_ms": 26773.056640625,
+     "peak_gb": 10.822495232
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1296.45202020202,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.80901515151517,
+    "temp_c_max": 79.0,
+    "samples": 1188
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0",
+  "triton": "3.8.0",
+  "cuda_runtime": "13.0",
+  "cudnn": 92800,
+  "driver": "580.82.07",
+  "nvcc": "Build cuda_13.0.r13.0/compiler.36424714_0",
+  "fp8_linears_replaced": 300
+ },
+ "kernels": {
+  "gpu_ms": 5687.050990000003,
+  "share": {
+   "other": 0.06666802683265556,
+   "gemm": 0.4602268654883294,
+   "norm": 0.05136127836968801,
+   "attn_quant": 0.009759137925366127,
+   "attention": 0.4119846913839608
+  },
+  "ms": {
+   "other": 379.1444680000006,
+   "gemm": 2617.333651000002,
+   "norm": 292.094209,
+   "attn_quant": 55.50071500000001,
+   "attention": 2342.9779470000003
+  },
+  "top_kernels": [
+   [
+    "void cutlass::Kernel2<at::cuda::detail::enable_2x_kernel_for_sm89<cutlass::gemm::kernel::DefaultGemmWithVisitor<cutlass:",
+    2615.978109000002,
+    "gemm"
+   ],
+   [
+    "void qk_int_sv_f16_attn_kernel<128u, 64u, 32u, 64u, 128u, (DataType)1, (QuantGranularity)3, (QuantGranularity)3, float, ",
+    2342.9779470000003,
+    "attention"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_gelu_t_view_12",
+    119.99949199999998,
+    "other"
+   ],
+   [
+    "triton_poi_fused__fused_rms_norm_add_mul_slice_sub_unbind_view_2",
+    79.22178399999999,
+    "norm"
+   ],
+   [
+    "triton_poi_fused_add_copy_sage_attn_slice_view_3",
+    75.95678199999999,
+    "other"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_6",
+    66.328744,
+    "norm"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_11",
+    56.882566,
+    "norm"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_13",
+    46.455905,
+    "other"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_0",
+    42.06454,
+    "norm"
+   ],
+   [
+    "quant_query_per_thread_int8_kernel",
+    36.77314799999999,
+    "attn_quant"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_amax_clamp_div_t_view_5",
+    36.53552599999999,
+    "other"
+   ],
+   [
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:",
+    26.613630000000004,
+    "other"
+   ],
+   [
+    "triton_poi_fused_add_copy_sage_attn_slice_view_4",
+    24.60119400000001,
+    "other"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_sage_attn_view_7",
+    24.478825000000008,
+    "norm"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",
+    23.196020000000004,
+    "other"
+   ]
+  ]
+ }
+}

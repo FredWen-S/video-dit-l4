@@ -1,0 +1,15 @@
+{
+ "ref": "results/f_base_81f",
+ "test": "results/f_fp8row_81f",
+ "videos": [
+  {
+   "video": "frames_0.npy",
+   "identical": false,
+   "max_abs": 255,
+   "mean_abs": 7.513011311926243,
+   "psnr_mean": 24.242197036743164,
+   "psnr_min": 20.90655517578125,
+   "lpips_mean": 0.14588071405887604
+  }
+ ]
+}

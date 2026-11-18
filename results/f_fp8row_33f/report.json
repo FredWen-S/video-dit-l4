@@ -1,0 +1,266 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": null,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "blocks",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": "_sage_qk_int8_pv_fp16_cuda",
+  "attn": "default",
+  "fp8_linears": "rowwise",
+  "fp8_fast_accum": false,
+  "cache_threshold": null,
+  "kernels": true,
+  "no_save_frames": false,
+  "out": "results/f_fp8row_33f"
+ },
+ "weights_gb": 2.005702656,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 1.9834773790003055,
+  "calls": 8,
+  "total_s": 1.96056982421875,
+  "mean_ms": 245.07122802734375,
+  "peak_gb": 13.48942848
+ },
+ "warmup_s": 31.42238837800005,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "seed": 0,
+   "key": "0",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 198.4395063019997,
+   "other_s": 0.4434041291481492,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 187.10746643066406,
+     "mean_ms": 1871.0746643066407,
+     "peak_gb": 2.551881216
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8886357421875,
+     "mean_ms": 10888.6357421875,
+     "peak_gb": 10.581687296
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1293.4005037783375,
+    "sm_mhz_min": 945.0,
+    "power_w_mean": 71.77929471032746,
+    "temp_c_max": 78.0,
+    "samples": 397
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 0,
+   "key": "1",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 199.0768776619998,
+   "other_s": 0.34652365809353114,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 187.84186572265625,
+     "mean_ms": 1878.4186572265626,
+     "peak_gb": 2.551881216
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.88848828125,
+     "mean_ms": 10888.48828125,
+     "peak_gb": 10.581687296
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1289.0954773869346,
+    "sm_mhz_min": 1005.0,
+    "power_w_mean": 71.65386934673366,
+    "temp_c_max": 79.0,
+    "samples": 398
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 0,
+   "key": "2",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 199.1890809419997,
+   "other_s": 0.344020150984079,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 187.95229028320313,
+     "mean_ms": 1879.5229028320311,
+     "peak_gb": 2.551881216
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.8927705078125,
+     "mean_ms": 10892.7705078125,
+     "peak_gb": 10.581687296
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1286.4661654135339,
+    "sm_mhz_min": 960.0,
+    "power_w_mean": 71.59847117794486,
+    "temp_c_max": 79.0,
+    "samples": 399
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 0,
+   "key": "3",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 199.21384750200014,
+   "other_s": 0.34586984086732286,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 187.96654602050782,
+     "mean_ms": 1879.665460205078,
+     "peak_gb": 2.551881216
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.901431640625,
+     "mean_ms": 10901.431640625,
+     "peak_gb": 10.581687296
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1287.0676691729323,
+    "sm_mhz_min": 1020.0,
+    "power_w_mean": 71.65503759398496,
+    "temp_c_max": 79.0,
+    "samples": 399
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0",
+  "triton": "3.8.0",
+  "cuda_runtime": "13.0",
+  "cudnn": 92800,
+  "driver": "580.82.07",
+  "nvcc": "Build cuda_13.0.r13.0/compiler.36424714_0",
+  "fp8_linears_replaced": 300
+ },
+ "kernels": {
+  "gpu_ms": 1859.0342879999998,
+  "share": {
+   "other": 0.08557595791907202,
+   "gemm": 0.5974250416837927,
+   "norm": 0.063237799194374,
+   "attn_quant": 0.011157369250200732,
+   "attention": 0.24260383195256047
+  },
+  "ms": {
+   "other": 159.08864,
+   "gemm": 1110.633637,
+   "norm": 117.56123700000003,
+   "attn_quant": 20.74193200000001,
+   "attention": 451.00884199999985
+  },
+  "top_kernels": [
+   [
+    "void cutlass::Kernel2<at::cuda::detail::enable_2x_kernel_for_sm89<cutlass::gemm::kernel::DefaultGemmWithVisitor<cutlass:",
+    1109.980905,
+    "gemm"
+   ],
+   [
+    "void qk_int_sv_f16_attn_kernel<128u, 64u, 32u, 64u, 128u, (DataType)1, (QuantGranularity)3, (QuantGranularity)3, float, ",
+    451.00884199999985,
+    "attention"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_gelu_t_view_12",
+    50.568257999999986,
+    "other"
+   ],
+   [
+    "triton_poi_fused__fused_rms_norm_add_mul_slice_sub_unbind_view_2",
+    32.66631300000001,
+    "norm"
+   ],
+   [
+    "triton_poi_fused_add_copy_sage_attn_slice_view_3",
+    32.53251900000001,
+    "other"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_6",
+    26.105071999999993,
+    "norm"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_11",
+    24.256761,
+    "norm"
+   ],
+   [
+    "triton_poi_fused__to_copy_add_mul_split_view_13",
+    20.152141,
+    "other"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_add_amax_clamp_div_mul_native_layer_norm_split_t_view_0",
+    16.737154,
+    "norm"
+   ],
+   [
+    "quant_query_per_thread_int8_kernel",
+    13.810453999999998,
+    "attn_quant"
+   ],
+   [
+    "triton_red_fused__scaled_mm__to_copy_abs_amax_clamp_div_t_view_5",
+    11.942271999999999,
+    "other"
+   ],
+   [
+    "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:",
+    11.708479,
+    "other"
+   ],
+   [
+    "triton_poi_fused_add_copy_sage_attn_slice_view_4",
+    10.159113,
+    "other"
+   ],
+   [
+    "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::CUDAFunctor_add<c10::BFloat16",
+    10.157189999999998,
+    "other"
+   ],
+   [
+    "triton_red_fused__fused_rms_norm_add_sage_attn_view_7",
+    8.389490999999998,
+    "norm"
+   ]
+  ]
+ }
+}
