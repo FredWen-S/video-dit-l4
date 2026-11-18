@@ -1,0 +1,172 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": null,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": null,
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "fp32",
+  "attn_backend": null,
+  "attn": "efficient",
+  "fp8_linears": null,
+  "fp8_fast_accum": false,
+  "cache_threshold": null,
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/g_fp32_33f"
+ },
+ "weights_gb": 6.226692096,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 1.2512205829998493,
+  "calls": 8,
+  "total_s": 1.240589340209961,
+  "mean_ms": 155.07366752624512,
+  "peak_gb": 17.71041792
+ },
+ "warmup_s": 60.98485987800041,
+ "runs": [
+  {
+   "prompt_id": 0,
+   "seed": 0,
+   "key": "0",
+   "prompt": "A red fox runs across a snowy field, kicking up powder, side tracking shot.",
+   "wall_s": 853.6442777849998,
+   "other_s": 0.4480443865622874,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 826.3463134765625,
+     "mean_ms": 8263.463134765625,
+     "peak_gb": 7.637666304
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.849919921875,
+     "mean_ms": 26849.919921875,
+     "peak_gb": 19.6913536
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1223.2601054481547,
+    "sm_mhz_min": 900.0,
+    "power_w_mean": 71.56940831868776,
+    "temp_c_max": 78.0,
+    "samples": 1707
+   }
+  },
+  {
+   "prompt_id": 1,
+   "seed": 0,
+   "key": "1",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 853.9561827309999,
+   "other_s": 0.3793575356874044,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 826.9821845703125,
+     "mean_ms": 8269.821845703125,
+     "peak_gb": 7.637666304
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.594640625,
+     "mean_ms": 26594.640625,
+     "peak_gb": 19.6913536
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1219.0222482435597,
+    "sm_mhz_min": 690.0,
+    "power_w_mean": 71.59628220140515,
+    "temp_c_max": 80.0,
+    "samples": 1708
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 0,
+   "key": "2",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 853.741110815,
+   "other_s": 0.3627895259373872,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 827.2221083984375,
+     "mean_ms": 8272.221083984376,
+     "peak_gb": 7.637666304
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.156212890625,
+     "mean_ms": 26156.212890625,
+     "peak_gb": 19.6913536
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1218.0755711775043,
+    "sm_mhz_min": 900.0,
+    "power_w_mean": 71.56953719976566,
+    "temp_c_max": 80.0,
+    "samples": 1707
+   }
+  },
+  {
+   "prompt_id": 3,
+   "seed": 0,
+   "key": "3",
+   "prompt": "A busy street market at night with people walking between food stalls and hanging lanterns.",
+   "wall_s": 854.2231918050002,
+   "other_s": 0.3838949300002241,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 827.684134765625,
+     "mean_ms": 8276.84134765625,
+     "peak_gb": 7.637666304
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 26.155162109375,
+     "mean_ms": 26155.162109375,
+     "peak_gb": 19.6913536
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1218.872950819672,
+    "sm_mhz_min": 900.0,
+    "power_w_mean": 71.60921545667448,
+    "temp_c_max": 80.0,
+    "samples": 1708
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.float32",
+  "tf32": false,
+  "sageattention": "2.2.0",
+  "triton": "3.8.0",
+  "cuda_runtime": "13.0",
+  "cudnn": 92800,
+  "driver": "580.82.07",
+  "nvcc": "Build cuda_13.0.r13.0/compiler.36424714_0",
+  "fp8_linears_replaced": null
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "config": {
+  "model": "Wan-AI/Wan2.1-T2V-1.3B-Diffusers",
+  "height": 480,
+  "width": 832,
+  "frames": 33,
+  "steps": 50,
+  "guidance": 5.0,
+  "seed": 0,
+  "seeds": null,
+  "prompts": "/content/video-dit-l4/bench/prompts.txt",
+  "n_prompts": null,
+  "prompt_ids": [
+   1,
+   2
+  ],
+  "warmup_steps": 2,
+  "compile": "none",
+  "no_fullgraph": false,
+  "emulate_precision_casts": false,
+  "dtype": "bf16",
+  "attn_backend": null,
+  "attn": "default",
+  "fp8_linears": null,
+  "fp8_fast_accum": false,
+  "cache_threshold": null,
+  "kernels": false,
+  "no_save_frames": false,
+  "out": "results/g_eager_33f"
+ },
+ "weights_gb": 3.378176,
+ "weights_with_text_encoder_gb": 14.714699776,
+ "text_encoding": {
+  "wall_s": 0.7413510100000167,
+  "calls": 4,
+  "total_s": 0.7289415588378906,
+  "mean_ms": 182.23538970947266,
+  "peak_gb": 14.861901824
+ },
+ "warmup_s": 19.53391073900002,
+ "runs": [
+  {
+   "prompt_id": 1,
+   "seed": 0,
+   "key": "1",
+   "prompt": "Slow aerial push-in over a coastal town at sunset, waves breaking on the rocks below.",
+   "wall_s": 214.1112548340002,
+   "other_s": 0.4098194091955065,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 202.7914617919922,
+     "mean_ms": 2027.914617919922,
+     "peak_gb": 4.093264384
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.9099736328125,
+     "mean_ms": 10909.9736328125,
+     "peak_gb": 11.95416064
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1178.8461538461538,
+    "sm_mhz_min": 1005.0,
+    "power_w_mean": 71.70128205128205,
+    "temp_c_max": 84.0,
+    "samples": 429
+   }
+  },
+  {
+   "prompt_id": 2,
+   "seed": 0,
+   "key": "2",
+   "prompt": "Close-up of rain drops landing on a green leaf, shallow depth of field.",
+   "wall_s": 213.94332028300005,
+   "other_s": 0.3850014353437814,
+   "phases": {
+    "transformer": {
+     "calls": 100,
+     "total_s": 202.63795947265626,
+     "mean_ms": 2026.3795947265626,
+     "peak_gb": 4.093264384
+    },
+    "vae_decode": {
+     "calls": 1,
+     "total_s": 10.920359375,
+     "mean_ms": 10920.359375,
+     "peak_gb": 11.95416064
+    }
+   },
+   "clocks": {
+    "sm_mhz_mean": 1182.5817757009345,
+    "sm_mhz_min": 1020.0,
+    "power_w_mean": 71.78193925233646,
+    "temp_c_max": 79.0,
+    "samples": 428
+   }
+  }
+ ],
+ "env": {
+  "gpu": "NVIDIA L4",
+  "torch": "2.14.1+cu130",
+  "diffusers": "0.42.1",
+  "transformers": "5.22.2",
+  "sdpa_flash": true,
+  "transformer_dtype": "torch.bfloat16",
+  "tf32": false,
+  "sageattention": "2.2.0",
+  "triton": "3.8.0",
+  "cuda_runtime": "13.0",
+  "cudnn": 92800,
+  "driver": "580.82.07",
+  "nvcc": "Build cuda_13.0.r13.0/compiler.36424714_0",
+  "fp8_linears_replaced": null
+ }
+}

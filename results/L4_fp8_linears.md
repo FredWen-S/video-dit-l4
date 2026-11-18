@@ -2,6 +2,13 @@
 
 Predictions: `predictions_fp8_2026-11-18.md`. Notebook: `colab/08_fp8_linears.ipynb`. Code: `bench/fp8_linear.py`, `bench/fp8_micro.py`.
 
+> **Update 2026-11-18 (`L4_fp8_fast_accum.md`).** The quality conclusions below don't survive the follow-up run.
+> - The activation statistics show tensorwise is only 2% worse than rowwise per GEMM.
+> - Three FP8 variants with near-identical GEMM errors give per-video PSNRs that swing by up to 7 dB in both directions.
+> - The base itself misses the per-video bar on the coast.
+>
+> So the 6 dB tensorwise vs rowwise gap on the fox, and rowwise passing the bar by 0.13 dB, are within single-video noise. The speed findings stand.
+
 **Result: 3 of 9 predictions held.** The two scale granularities split speed and quality between them:
 
 | Variant | Speed | Quality vs fp32 |

@@ -1,0 +1,24 @@
+{
+ "ref": "results/g_fp32_33f",
+ "test": "results/g_eager_33f",
+ "videos": [
+  {
+   "video": "frames_1.npy",
+   "identical": false,
+   "max_abs": 230,
+   "mean_abs": 4.714098390758547,
+   "psnr_mean": 28.65265464782715,
+   "psnr_min": 28.127546310424805,
+   "lpips_mean": 0.04859353229403496
+  },
+  {
+   "video": "frames_2.npy",
+   "identical": false,
+   "max_abs": 245,
+   "mean_abs": 6.013345317153911,
+   "psnr_mean": 27.34487533569336,
+   "psnr_min": 26.940380096435547,
+   "lpips_mean": 0.05456378683447838
+  }
+ ]
+}
