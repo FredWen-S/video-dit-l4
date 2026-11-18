@@ -21,6 +21,7 @@ Inference profiling and optimization of a video diffusion transformer (Wan2.1-T2
   - **Quality:** further from fp32 than bf16 eager on all four videos (5.4 dB on average), so FP8 linears stay out of the clean base.
   - **Measurement:** at FP8's perturbation size, a single video's PSNR to a reference is too noisy to rank variants. Per-video distances swing by up to 7 dB between variants with the same GEMM error, and the base itself misses the per-video bar on the coast. Activation statistics (`bench/fp8_act_stats.py`) show per-tensor scales cost only 2% more GEMM error than per-row scales, so the first run's rowwise vs tensorwise gap was noise.
   - **Next:** judge numerical changes by the error of a single forward against fp32 on the same input, and judge FP8 with the reference-free protocol.
+- [ ] Per-forward error against fp32 (`bench/forward_error.py`, `colab/10_forward_error.ipynb`, predictions `predictions_forward_error_2026-11-18.md`). The base trajectory's transformer inputs are captured at 6 steps × 2 CFG branches × 4 prompts. Each variant (eager, compile, emulated casts, base, Sage FP8-PV, three FP8 linear variants) runs one forward on those exact inputs and is scored against an fp32 forward, without the 50-step trajectory noise
 - [ ] Quality metrics: frame hashes (`bench/hash_frames.py`), PSNR/LPIPS (`bench/compare_frames.py`) and CLIP score (`bench/clip_score.py`) are in place
 
 ## Plan
